@@ -1,0 +1,116 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "WoodcarvingApp.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/WoodcarvingApp.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WoodcarvingApp.Common.dll": {}
+        }
+      },
+      "WoodcarvingApp.Data.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/WoodcarvingApp.Data.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WoodcarvingApp.Data.Models.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WoodcarvingApp.Common/1.0.0": {
+      "type": "project",
+      "path": "../WoodcarvingApp.Common/WoodcarvingApp.Common.csproj",
+      "msbuildProject": "../WoodcarvingApp.Common/WoodcarvingApp.Common.csproj"
+    },
+    "WoodcarvingApp.Data.Models/1.0.0": {
+      "type": "project",
+      "path": "../WoodcarvingApp.Data.Models/WoodcarvingApp.Data.Models.csproj",
+      "msbuildProject": "../WoodcarvingApp.Data.Models/WoodcarvingApp.Data.Models.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "WoodcarvingApp.Common >= 1.0.0",
+      "WoodcarvingApp.Data.Models >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\bird\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\WoodcarvingApp.Web.ViewModels.csproj",
+      "projectName": "WoodcarvingApp.Web.ViewModels",
+      "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\WoodcarvingApp.Web.ViewModels.csproj",
+      "packagesPath": "C:\\Users\\bird\\.nuget\\packages\\",
+      "outputPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\bird\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj": {
+              "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj"
+            },
+            "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj": {
+              "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
