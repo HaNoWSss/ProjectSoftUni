@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WoodcarvingApp.Data.Models;
 using WoodcarvingApp.Web.Data;
 
 namespace WoodcarvingApp.Web
@@ -9,18 +10,35 @@ namespace WoodcarvingApp.Web
         public static void Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("SQLServer") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            string connectionString = builder.Configuration.GetConnectionString("SQLServer") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
             // Add services to the container.
             builder.Services.AddDbContext<WoodcarvingDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer"));
+            });
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<WoodcarvingDbContext>();
+
+            builder.Services//
+                .AddIdentity<ApplicationUser, IdentityRole<Guid>>(cfg =>
+                {
+
+                })
+                .AddEntityFrameworkStores<WoodcarvingDbContext>()
+                .AddRoles<IdentityRole<Guid>>()
+                .AddSignInManager<SignInManager<ApplicationUser>>()
+                .AddUserManager<UserManager<ApplicationUser>>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.ConfigureApplicationCookie(cfg =>//
+            {
+                cfg.LoginPath = "/Identity/Account/Login";
+            });
+
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages(); //
 
-            var app = builder.Build();
+            WebApplication app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
