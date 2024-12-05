@@ -10,16 +10,14 @@ namespace WoodcarvingApp.Web
         public static void Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            string connectionString = builder.Configuration.GetConnectionString("SQLServer") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("SQLServer") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
             // Add services to the container.
             builder.Services.AddDbContext<WoodcarvingDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer"));
-            });
+                options.UseSqlServer(connectionString));
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-
-            builder.Services//
+            builder.Services
                 .AddIdentity<ApplicationUser, IdentityRole<Guid>>(cfg =>
                 {
 
@@ -30,15 +28,11 @@ namespace WoodcarvingApp.Web
                 .AddUserManager<UserManager<ApplicationUser>>()
                 .AddDefaultTokenProviders();
 
-            builder.Services.ConfigureApplicationCookie(cfg =>//
-            {
-                cfg.LoginPath = "/Identity/Account/Login";
-            });
-
             builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages(); //
+            builder.Services.AddRazorPages();
 
-            WebApplication app = builder.Build();
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
