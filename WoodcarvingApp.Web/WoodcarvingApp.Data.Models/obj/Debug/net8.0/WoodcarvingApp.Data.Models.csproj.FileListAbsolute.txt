@@ -1,0 +1,13 @@
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\bin\Debug\net8.0\WoodcarvingApp.Data.Models.deps.json
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\bin\Debug\net8.0\WoodcarvingApp.Data.Models.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\bin\Debug\net8.0\WoodcarvingApp.Data.Models.pdb
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\WoodcarvingApp.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\WoodcarvingApp.Data.Models.AssemblyInfoInputs.cache
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\WoodcarvingApp.Data.Models.AssemblyInfo.cs
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\WoodcarvingApp.Data.Models.csproj.CoreCompileInputs.cache
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\WoodcarvingApp.Data.Models.sourcelink.json
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\WoodcarvingApp.Data.Models.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\refint\WoodcarvingApp.Data.Models.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\WoodcarvingApp.Data.Models.pdb
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\ref\WoodcarvingApp.Data.Models.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Data.Models\obj\Debug\net8.0\WoodcarvingApp.Data.Models.csproj.AssemblyReference.cache

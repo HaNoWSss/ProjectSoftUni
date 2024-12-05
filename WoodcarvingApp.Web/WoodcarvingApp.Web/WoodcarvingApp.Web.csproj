@@ -11,8 +11,21 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.10" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WoodcarvingApp.Common\WoodcarvingApp.Common.csproj" />
+    <ProjectReference Include="..\WoodcarvingApp.Data\WoodcarvingApp.Data.csproj" />
+    <ProjectReference Include="..\WoodcarvingApp.Services.Data\WoodcarvingApp.Services.Data.csproj" />
+    <ProjectReference Include="..\WoodcarvingApp.Web.Infrastructure\WoodcarvingApp.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\WoodcarvingApp.Web.ViewModels\WoodcarvingApp.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
