@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WoodcarvingApp.Common\WoodcarvingApp.Common.csproj" />
-    <ProjectReference Include="..\WoodcarvingApp.Data.Models\WoodcarvingApp.Data.Models.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\WoodcarvingApp.Common\WoodcarvingApp.Common.csproj" />
+		<ProjectReference Include="..\WoodcarvingApp.Data.Models\WoodcarvingApp.Data.Models.csproj" />
+	</ItemGroup>
 
 </Project>

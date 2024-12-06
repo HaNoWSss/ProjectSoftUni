@@ -1,3 +1,14 @@
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\bin\Debug\net8.0\WoodcarvingApp.Common.deps.json
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\bin\Debug\net8.0\WoodcarvingApp.Common.dll
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\bin\Debug\net8.0\WoodcarvingApp.Common.pdb
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\obj\Debug\net8.0\WoodcarvingApp.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\obj\Debug\net8.0\WoodcarvingApp.Common.AssemblyInfoInputs.cache
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\obj\Debug\net8.0\WoodcarvingApp.Common.AssemblyInfo.cs
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\obj\Debug\net8.0\WoodcarvingApp.Common.csproj.CoreCompileInputs.cache
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\obj\Debug\net8.0\WoodcarvingApp.Common.dll
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\obj\Debug\net8.0\refint\WoodcarvingApp.Common.dll
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\obj\Debug\net8.0\WoodcarvingApp.Common.pdb
+C:\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\obj\Debug\net8.0\ref\WoodcarvingApp.Common.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\bin\Debug\net8.0\WoodcarvingApp.Common.deps.json
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\bin\Debug\net8.0\WoodcarvingApp.Common.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Common\bin\Debug\net8.0\WoodcarvingApp.Common.pdb
