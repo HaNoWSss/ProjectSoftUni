@@ -1,0 +1,46 @@
+﻿@model WoodcarvingApp.Web.ViewModels.WoodType.WoodTypeCreateViewModel
+
+@{
+    ViewData["Title"] = "Add New Wood Type";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Add New Wood Type</h1>
+
+    <form asp-action="Create" asp-controller="WoodType" method="post" class="mt-4">
+        <div class="mb-3">
+            <label asp-for="WoodTypeName" class="form-label">Wood Type Name</label>
+            <input asp-for="WoodTypeName" class="form-control" placeholder="Enter wood type name" />
+            <span asp-validation-for="WoodTypeName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control" placeholder="Enter description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Hardness" class="form-label">Hardness</label>
+            <input asp-for="Hardness" class="form-control" placeholder="Enter hardness" />
+            <span asp-validation-for="Hardness" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Color" class="form-label">Color</label>
+            <input asp-for="Color" class="form-control" placeholder="Enter color" />
+            <span asp-validation-for="Color" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageUrl" class="form-label">Image URL</label>
+            <input asp-for="ImageUrl" class="form-control" placeholder="Enter image URL (optional)" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success">Add Wood Type</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
