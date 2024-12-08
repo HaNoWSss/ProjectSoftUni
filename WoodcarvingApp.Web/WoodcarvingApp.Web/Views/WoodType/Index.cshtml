@@ -6,7 +6,16 @@
 
 <div class="container mt-4">
     <h1 class="text-center">Wood Types</h1>
+
+    <div class="text-end mb-3">
+        <a href="@Url.Action("Create", "WoodType")" class="btn btn-primary">
+            Add New Wood Type
+        </a>
+
+    </div>
     <div class="row">
+        @if (Model != null && Model.Any())
+        {
         @foreach (var woodType in Model)
         {
             <div class="col-md-4 mb-4">
@@ -17,6 +26,13 @@
                         <a asp-action="Details" asp-route-id="@woodType.Id" class="btn btn-primary">Details</a>
                     </div>
                 </div>
+            </div>
+        }
+        }
+        else
+        {
+            <div class="alert alert-info text-center">
+                No wood types found! Click "Add New Wood Type" to create one.
             </div>
         }
     </div>
