@@ -33,6 +33,7 @@ namespace WoodcarvingApp.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WoodcarverCreateViewModel inputModel)
         {
             if (!ModelState.IsValid)

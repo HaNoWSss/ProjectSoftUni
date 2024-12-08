@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WoodcarvingApp.Data.Models.City>
+
+@{
+    ViewData["Title"] = "Cities";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>All Cities</h1>
+        <a asp-action="Create" asp-controller="City" class="btn btn-primary">Add City</a>
+    </div>
+
+
+    @if (Model != null && Model.Any())
+    {
+    <div class="row">
+        @foreach (var city in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <img src="@city.ImageUrl" class="card-img-top" alt="@city.CityName" style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@city.CityName</h5>
+                        <a asp-action="Details" asp-route-id="@city.Id" asp-controller="City" class="btn btn-outline-secondary">Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            No cities found! Click "Add City" to create one.
+        </div>
+    }
+</div>
