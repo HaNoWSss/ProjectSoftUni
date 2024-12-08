@@ -69,5 +69,31 @@ namespace WoodcarvingApp.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var woodcarver = await dbContext.Woodcarvers
+                .Include(w => w.City)
+                .FirstOrDefaultAsync(w => w.Id == id && !w.IsDeleted);
+
+            if (woodcarver == null)
+            {
+                return NotFound();
+            }
+
+            var model = new WoodcarverDetailsViewModel
+            {
+                Id = woodcarver.Id,
+                FullName = $"{woodcarver.FirstName} {woodcarver.LastName}",
+                ImageUrl = woodcarver.ImageUrl,
+                CityId = woodcarver.CityId,
+                CityName = woodcarver.City.CityName,
+                Age = woodcarver.Age,
+                PhoneNumber = woodcarver.PhoneNumber
+            };
+
+            return View(model);
+        }
     }
 }
