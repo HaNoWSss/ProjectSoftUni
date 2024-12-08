@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WoodcarvingApp.Web.ViewModels.WoodType.WoodTypeIndexViewModel>
+
+@{
+    ViewData["Title"] = "Wood Types";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Wood Types</h1>
+    <div class="row">
+        @foreach (var woodType in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@woodType.ImageUrl" class="card-img-top" alt="@woodType.WoodTypeName" />
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@woodType.WoodTypeName</h5>
+                        <a asp-action="Details" asp-route-id="@woodType.Id" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
