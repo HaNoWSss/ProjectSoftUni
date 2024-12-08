@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,13 +15,14 @@ namespace WoodcarvingApp.Web.ViewModels.Woodcarver
         [Column(TypeName = "NVARCHAR(20)")]
         public string LastName { get; set; } = null!;
 
+        [Required]
         public Guid CityId { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(CityId))]
+        [BindNever]
         public SelectList CityList { get; set; } = null!;
 
         [Required]
+        [Range(1, 120)]
         public int Age { get; set; }
 
         [Required]

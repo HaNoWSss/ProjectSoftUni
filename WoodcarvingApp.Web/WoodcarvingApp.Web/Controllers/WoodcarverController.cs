@@ -36,16 +36,20 @@ namespace WoodcarvingApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WoodcarverCreateViewModel inputModel)
         {
+            if (ModelState.ContainsKey(nameof(WoodcarverCreateViewModel.CityList)))
+            {
+                ModelState.Remove(nameof(WoodcarverCreateViewModel.CityList));
+            }
+            inputModel.CityList = new SelectList(await dbContext.Cities.ToListAsync(), nameof(City.Id), nameof(City.CityName));
+
             if (!ModelState.IsValid)
             {
-                inputModel.CityList = new SelectList(await dbContext.Cities.ToListAsync(), nameof(City.Id), nameof(City.CityName));
                 return View(inputModel);
             }
 
-            if (!dbContext.Cities.Any(w => w.Id == inputModel.CityId))
+            if (!dbContext.Cities.Any(c => c.Id == inputModel.CityId))
             {
                 ModelState.AddModelError(nameof(inputModel.CityId), "Invalid city selected.");
-                inputModel.CityList = new SelectList(await dbContext.Cities.ToListAsync(), nameof(City.Id), nameof(City.CityName));
                 return View(inputModel);
             }
 
