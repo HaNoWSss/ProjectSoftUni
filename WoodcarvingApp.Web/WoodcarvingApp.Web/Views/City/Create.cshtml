@@ -1,0 +1,28 @@
+﻿@model WoodcarvingApp.Web.ViewModels.City.CityCreateViewModel
+
+@{
+    ViewData["Title"] = "Add City";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Add New City</h1>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="mt-4">
+        <div class="mb-3">
+            <label for="CityName" class="form-label">City Name</label>
+            <input asp-for="CityName" class="form-control" placeholder="Enter city name" />
+            <span asp-validation-for="CityName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="ImageUrl" class="form-label">Image URL</label>
+            <input asp-for="ImageUrl" class="form-control" placeholder="Enter image URL (optional)" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success">Add City</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WoodcarvingApp.Data.Models;
 using WoodcarvingApp.Web.Data;
-using WoodcarvingApp.Web.ViewModels.Woodcarver;
+using WoodcarvingApp.Web.ViewModels.City;
 
 namespace WoodcarvingApp.Web.Controllers
 {
@@ -22,14 +21,27 @@ namespace WoodcarvingApp.Web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var cities = dbContext.Cities;
+            return View(new CityCreateViewModel());
+        }
 
-            var model = new WoodcarverCreateViewModel()
+        [HttpPost]
+        public async Task<IActionResult> Create(CityCreateViewModel inputModel)
+        {
+            if (!ModelState.IsValid)
             {
-                CityList = new SelectList(cities, nameof(City.Id), nameof(City.CityName))
+                return View(inputModel);
+            }
+
+            var city = new City
+            {
+                CityName = inputModel.CityName,
+                ImageUrl = inputModel.ImageUrl
             };
 
-            return View(model);
+            await dbContext.Cities.AddAsync(city);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
