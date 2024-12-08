@@ -29,6 +29,7 @@
 		<ProjectReference Include="..\WoodcarvingApp.Services.Data\WoodcarvingApp.Services.Data.csproj" />
 		<ProjectReference Include="..\WoodcarvingApp.Web.Infrastructure\WoodcarvingApp.Web.Infrastructure.csproj" />
 		<ProjectReference Include="..\WoodcarvingApp.Web.ViewModels\WoodcarvingApp.Web.ViewModels.csproj" />
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
 </Project>

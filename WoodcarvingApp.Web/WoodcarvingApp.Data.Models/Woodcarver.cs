@@ -6,7 +6,7 @@ namespace WoodcarvingApp.Data.Models
     public class Woodcarver
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [Column(TypeName = "NVARCHAR(20)")]
@@ -15,6 +15,12 @@ namespace WoodcarvingApp.Data.Models
         [Required]
         [Column(TypeName = "NVARCHAR(20)")]
         public string LastName { get; set; } = null!;
+
+        public Guid CityId { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(CityId))]
+        public virtual City City { get; set; } = null!;
 
         [Required]
         public int Age { get; set; }

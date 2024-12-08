@@ -3212,6 +3212,7 @@
       "WoodcarvingApp.Web.ViewModels/1.0.0": {
         "dependencies": {
           "WoodcarvingApp.Common": "1.0.0",
+          "WoodcarvingApp.Data": "1.0.0",
           "WoodcarvingApp.Data.Models": "1.0.0"
         },
         "runtime": {

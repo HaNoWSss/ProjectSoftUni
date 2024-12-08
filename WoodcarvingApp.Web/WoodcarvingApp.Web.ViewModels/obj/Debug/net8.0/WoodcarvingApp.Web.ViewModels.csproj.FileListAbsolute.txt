@@ -33,3 +33,5 @@ C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug\net8.0\refint\WoodcarvingApp.Web.ViewModels.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug\net8.0\WoodcarvingApp.Web.ViewModels.pdb
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug\net8.0\ref\WoodcarvingApp.Web.ViewModels.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Data.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Data.pdb

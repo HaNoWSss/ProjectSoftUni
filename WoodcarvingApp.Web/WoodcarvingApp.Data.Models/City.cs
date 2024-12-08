@@ -17,5 +17,6 @@ namespace WoodcarvingApp.Data.Models
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<Exhibition> Exhibitions { get; set; } = new HashSet<Exhibition>();
+        public virtual ICollection<Woodcarver> Woodcarvers { get; set; } = new HashSet<Woodcarver>();
     }
 }

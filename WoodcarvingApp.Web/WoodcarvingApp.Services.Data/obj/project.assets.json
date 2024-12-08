@@ -1223,6 +1223,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "WoodcarvingApp.Common": "1.0.0",
+          "WoodcarvingApp.Data": "1.0.0",
           "WoodcarvingApp.Data.Models": "1.0.0"
         },
         "compile": {
@@ -1230,7 +1231,10 @@
         },
         "runtime": {
           "bin/placeholder/WoodcarvingApp.Web.ViewModels.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WoodcarvingApp.Data.Models.Woodcarving>
+
+@{
+    ViewData["Title"] = "Woodcarvings";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">My Woodcarvings</h1>
+
+    <div class="text-end mb-3">
+        <a href="@Url.Action("Create", "Woodcarving")" class="btn btn-primary">
+            Add New Woodcarving
+        </a>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var woodcarving in Model)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="@woodcarving.ImageUrl" class="card-img-top" alt="@woodcarving.Title" />
+                        <div class="card-body">
+                            <h5 class="card-title">@woodcarving.Title</h5>
+                            <p class="card-text">@woodcarving.Description</p>
+                            <p class="card-text"><strong>Price: Negotiable</strong></p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="@Url.Action("Details", "Woodcarvings", new { id = woodcarving.Id })" class="btn btn-info btn-sm">View Details</a>
+                            <a href="@Url.Action("Edit", "Woodcarvings", new { id = woodcarving.Id })" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="@Url.Action("Delete", "Woodcarvings", new { id = woodcarving.Id })" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            No woodcarvings found! Click "Add New Woodcarving" to create one.
+        </div>
+    }
+</div>

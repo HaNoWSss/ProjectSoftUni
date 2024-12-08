@@ -237,7 +237,7 @@ namespace WoodcarvingApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("WoodcarvingApp.Data.Models.Exhibition", b =>
@@ -270,7 +270,7 @@ namespace WoodcarvingApp.Data.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Exhibitions", (string)null);
+                    b.ToTable("Exhibitions");
                 });
 
             modelBuilder.Entity("WoodcarvingApp.Data.Models.WoodType", b =>
@@ -303,7 +303,7 @@ namespace WoodcarvingApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WoodTypes", (string)null);
+                    b.ToTable("WoodTypes");
                 });
 
             modelBuilder.Entity("WoodcarvingApp.Data.Models.Woodcarver", b =>
@@ -314,6 +314,9 @@ namespace WoodcarvingApp.Data.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("CityId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -335,7 +338,9 @@ namespace WoodcarvingApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Woodcarvers", (string)null);
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Woodcarvers");
                 });
 
             modelBuilder.Entity("WoodcarvingApp.Data.Models.Woodcarving", b =>
@@ -373,7 +378,7 @@ namespace WoodcarvingApp.Data.Migrations
 
                     b.HasIndex("WoodcarverId");
 
-                    b.ToTable("Woodcarvings", (string)null);
+                    b.ToTable("Woodcarvings");
                 });
 
             modelBuilder.Entity("WoodcarvingApp.Data.Models.WoodcarvingExhibition", b =>
@@ -391,7 +396,7 @@ namespace WoodcarvingApp.Data.Migrations
 
                     b.HasIndex("ExhibitionId");
 
-                    b.ToTable("WoodcarvingExhibition", (string)null);
+                    b.ToTable("WoodcarvingExhibition");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -456,6 +461,17 @@ namespace WoodcarvingApp.Data.Migrations
                     b.Navigation("City");
                 });
 
+            modelBuilder.Entity("WoodcarvingApp.Data.Models.Woodcarver", b =>
+                {
+                    b.HasOne("WoodcarvingApp.Data.Models.City", "City")
+                        .WithMany("Woodcarvers")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
             modelBuilder.Entity("WoodcarvingApp.Data.Models.Woodcarving", b =>
                 {
                     b.HasOne("WoodcarvingApp.Data.Models.WoodType", "WoodType")
@@ -497,6 +513,8 @@ namespace WoodcarvingApp.Data.Migrations
             modelBuilder.Entity("WoodcarvingApp.Data.Models.City", b =>
                 {
                     b.Navigation("Exhibitions");
+
+                    b.Navigation("Woodcarvers");
                 });
 
             modelBuilder.Entity("WoodcarvingApp.Data.Models.Exhibition", b =>
