@@ -1,0 +1,49 @@
+﻿@model WoodcarvingApp.Web.ViewModels.Woodcarver.WoodcarverCreateViewModel
+
+@{
+    ViewData["Title"] = "Add Woodcarver";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Add New Woodcarver</h1>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="mt-4">
+        <div class="mb-3">
+            <label for="FirstName" class="form-label">First Name</label>
+            <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="LastName" class="form-label">Last Name</label>
+            <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="Age" class="form-label">Age</label>
+            <input asp-for="Age" class="form-control" placeholder="Enter Age" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="PhoneNumber" class="form-label">Phone Number</label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CityId" class="form-label">Select City</label>
+            <select asp-for="CityId" class="form-control" asp-items="@Model.CityList">
+            </select>
+            <span asp-validation-for="CityId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="ImageUrl" class="form-label">Photo URL</label>
+            <input asp-for="ImageUrl" class="form-control" placeholder="Enter photo URL" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success">Add Woodcarver</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

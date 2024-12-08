@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WoodcarvingApp.Data.Models;
 using WoodcarvingApp.Web.Data;
-using WoodcarvingApp.Web.ViewModels.Woodcarving;
+using WoodcarvingApp.Web.ViewModels.Woodcarver;
 
 namespace WoodcarvingApp.Web.Controllers
 {
@@ -21,13 +21,11 @@ namespace WoodcarvingApp.Web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var woodcarvers = dbContext.Woodcarvers;
-            var woodTypes = dbContext.WoodTypes;
+            var cities = dbContext.Cities;
 
-            var model = new WoodcarvingCreateViewModel()
+            var model = new WoodcarverCreateViewModel()
             {
-                WoodcarverList = new SelectList(woodcarvers, nameof(Woodcarver.Id), nameof(Woodcarver.FirstName)),
-                WoodTypeList = new SelectList(woodTypes, nameof(WoodType.Id), nameof(WoodType.WoodTypeName))
+                CityList = new SelectList(cities, nameof(City.Id), nameof(City.CityName))
             };
 
             return View(model);
