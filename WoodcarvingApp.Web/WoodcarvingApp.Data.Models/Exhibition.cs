@@ -23,6 +23,8 @@ namespace WoodcarvingApp.Data.Models
         [ForeignKey(nameof(CityId))]
         public virtual City City { get; set; } = null!;
 
+        public string? ImageUrl { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public ICollection<WoodcarvingExhibition> ExhibitionWoodcarvings { get; set; } = new HashSet<WoodcarvingExhibition>();
