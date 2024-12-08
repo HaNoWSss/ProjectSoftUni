@@ -7,7 +7,7 @@
 <div class="container mt-4">
     <h1 class="text-center">Add New Woodcarver</h1>
 
-    <form asp-action="Create" method="post" enctype="multipart/form-data" class="mt-4">
+    <form asp-action="Create" asp-controller="Woodcarver" method="post" enctype="multipart/form-data" class="mt-4">
         <div class="mb-3">
             <label for="FirstName" class="form-label">First Name</label>
             <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />

@@ -9,6 +9,7 @@ namespace WoodcarvingApp.Web.Controllers
 {
     public class WoodcarverController(WoodcarvingDbContext dbContext) : BaseController
     {
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             IEnumerable<Woodcarver> allWoodcarvers = await dbContext
@@ -32,16 +33,36 @@ namespace WoodcarvingApp.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Woodcarver model)
+        public async Task<IActionResult> Create(WoodcarverCreateViewModel inputModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                dbContext.Woodcarvers.Add(model);
-                await dbContext.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                inputModel.CityList = new SelectList(await dbContext.Cities.ToListAsync(), nameof(City.Id), nameof(City.CityName));
+                return View(inputModel);
             }
 
-            return View(model);
+            if (!dbContext.Cities.Any(w => w.Id == inputModel.CityId))
+            {
+                ModelState.AddModelError(nameof(inputModel.CityId), "Invalid city selected.");
+                inputModel.CityList = new SelectList(await dbContext.Cities.ToListAsync(), nameof(City.Id), nameof(City.CityName));
+                return View(inputModel);
+            }
+
+            var woodcarver = new Woodcarver
+            {
+                FirstName = inputModel.FirstName,
+                LastName = inputModel.LastName,
+                CityId = inputModel.CityId,
+                Age = inputModel.Age,
+                PhoneNumber = inputModel.PhoneNumber,
+                ImageUrl = inputModel.ImageUrl,
+                IsDeleted = false
+            };
+
+            await dbContext.Woodcarvers.AddAsync(woodcarver);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
