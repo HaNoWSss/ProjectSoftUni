@@ -37,6 +37,18 @@ namespace WoodcarvingApp.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(WoodcarvingCreateViewModel inputModel)
         {
+            if (ModelState.ContainsKey(nameof(WoodcarvingCreateViewModel.WoodcarverList)))
+            {
+                ModelState.Remove(nameof(WoodcarvingCreateViewModel.WoodcarverList));
+            }
+            inputModel.WoodcarverList = new SelectList(await dbContext.Woodcarvers.ToListAsync(), nameof(Woodcarver.Id), nameof(Woodcarver.FirstName));
+
+            if (ModelState.ContainsKey(nameof(WoodcarvingCreateViewModel.WoodTypeList)))
+            {
+                ModelState.Remove(nameof(WoodcarvingCreateViewModel.WoodTypeList));
+            }
+            inputModel.WoodTypeList = new SelectList(await dbContext.WoodTypes.ToListAsync(), nameof(WoodType.Id), nameof(WoodType.WoodTypeName));
+
             if (!ModelState.IsValid)
             {
                 inputModel.WoodcarverList = new SelectList(await dbContext.Woodcarvers.ToListAsync(), nameof(Woodcarver.Id), nameof(Woodcarver.FirstName));
