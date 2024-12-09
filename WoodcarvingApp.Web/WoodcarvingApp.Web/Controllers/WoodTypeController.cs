@@ -79,6 +79,59 @@ namespace WoodcarvingApp.Web.Controllers
 
             return View(model);
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var woodType = await dbContext.WoodTypes
+                .Where(w => !w.IsDeleted && w.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (woodType == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new WoodTypeEditViewModel
+            {
+                Id = woodType.Id,
+                WoodTypeName = woodType.WoodTypeName,
+                Description = woodType.Description,
+                Hardness = woodType.Hardness,
+                Color = woodType.Color,
+                ImageUrl = woodType.ImageUrl
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(WoodTypeEditViewModel inputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(inputModel);
+            }
+
+            var woodType = await dbContext.WoodTypes
+                .Where(w => !w.IsDeleted && w.Id == inputModel.Id)
+                .FirstOrDefaultAsync();
+
+            if (woodType == null)
+            {
+                return NotFound();
+            }
+
+            woodType.WoodTypeName = inputModel.WoodTypeName;
+            woodType.Description = inputModel.Description;
+            woodType.Hardness = inputModel.Hardness;
+            woodType.Color = inputModel.Color;
+            woodType.ImageUrl = inputModel.ImageUrl;
+
+            dbContext.WoodTypes.Update(woodType);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }
