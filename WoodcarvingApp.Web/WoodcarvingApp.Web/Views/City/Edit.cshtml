@@ -1,0 +1,33 @@
+﻿@model WoodcarvingApp.Web.ViewModels.City.CityEditViewModel
+
+@{
+    ViewData["Title"] = "Edit City";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Edit City</h1>
+
+    <form asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label asp-for="CityName" class="form-label">City Name</label>
+            <input asp-for="CityName" class="form-control" />
+            <span asp-validation-for="CityName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageUrl" class="form-label">Image URL</label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

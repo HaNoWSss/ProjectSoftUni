@@ -84,6 +84,53 @@ namespace WoodcarvingApp.Web.Controllers
 
             return View(model);
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var city = await dbContext.Cities
+                .Where(c => !c.IsDeleted && c.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new CityEditViewModel
+            {
+                Id = city.Id,
+                CityName = city.CityName,
+                ImageUrl = city.ImageUrl
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(CityEditViewModel inputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(inputModel);
+            }
+
+            var city = await dbContext.Cities
+                .Where(c => !c.IsDeleted && c.Id == inputModel.Id)
+                .FirstOrDefaultAsync();
+
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            city.CityName = inputModel.CityName;
+            city.ImageUrl = inputModel.ImageUrl;
+
+            dbContext.Cities.Update(city);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }
