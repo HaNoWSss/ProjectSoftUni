@@ -54,5 +54,31 @@ namespace WoodcarvingApp.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var woodType = await dbContext.WoodTypes
+                .Where(w => !w.IsDeleted && w.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (woodType == null)
+            {
+                return NotFound();
+            }
+
+            var model = new WoodTypeDetailsViewModel
+            {
+                Id = woodType.Id,
+                WoodTypeName = woodType.WoodTypeName,
+                Description = woodType.Description,
+                Hardness = woodType.Hardness,
+                Color = woodType.Color,
+                ImageUrl = woodType.ImageUrl
+            };
+
+            return View(model);
+        }
+
     }
 }
