@@ -17,6 +17,7 @@ namespace WoodcarvingApp.Web.Data
         public virtual DbSet<City> Cities { get; set; } = null!;
         public virtual DbSet<WoodType> WoodTypes { get; set; } = null!;
         public virtual DbSet<Exhibition> Exhibitions { get; set; } = null!;
+        public virtual DbSet<WoodcarvingExhibition> WoodcarvingExhibitions { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -10,6 +10,8 @@
         <a asp-action="Create" class="btn btn-primary">Add Exhibition</a>
     </div>
 
+    @if (Model != null && Model.Any())
+    {
     <div class="row">
         @foreach (var exhibition in Model)
         {
@@ -31,4 +33,11 @@
             </div>
         }
     </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            No woodcarvings found! Click "Add New Woodcarving" to create one.
+        </div>
+    }
 </div>
