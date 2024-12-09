@@ -2,7 +2,7 @@
 
 namespace WoodcarvingApp.Web.Controllers
 {
-    public class ExhibitionsController : Controller
+    public class ExhibitionsController : BaseController
     {
         public IActionResult Index()
         {

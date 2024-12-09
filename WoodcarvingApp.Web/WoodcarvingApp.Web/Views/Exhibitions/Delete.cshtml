@@ -1,0 +1,17 @@
+﻿@model WoodcarvingApp.Web.ViewModels.Exhibition.ExhibitionDeleteViewModel
+
+@{
+    ViewData["Title"] = "Delete Exhibition";
+}
+
+<div class="container mt-4">
+    <h1>Are you sure you want to delete this exhibition?</h1>
+    <h2>@Model.ExhibitionName</h2>
+    <p>@Model.CityName</p>
+    <p>@Model.StartDate.ToString("d") - @Model.EndDate.ToString("d")</p>
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
