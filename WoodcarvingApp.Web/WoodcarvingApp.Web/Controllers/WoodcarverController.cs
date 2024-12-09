@@ -95,5 +95,67 @@ namespace WoodcarvingApp.Web.Controllers
 
             return View(model);
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var woodcarver = await dbContext.Woodcarvers
+                .Where(w => !w.IsDeleted && w.Id == id)
+                .Select(w => new WoodcarverEditViewModel
+                {
+                    Id = w.Id,
+                    FirstName = w.FirstName,
+                    LastName = w.LastName,
+                    Age = w.Age,
+                    PhoneNumber = w.PhoneNumber,
+                    CityId = w.CityId,
+                    ImageUrl = w.ImageUrl,
+                    CityList = new SelectList(dbContext.Cities.Where(c => !c.IsDeleted).ToList(), nameof(City.Id), nameof(City.CityName))
+                })
+                .FirstOrDefaultAsync();
+
+            if (woodcarver == null)
+            {
+                return NotFound();
+            }
+
+            return View(woodcarver);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(WoodcarverEditViewModel inputModel)
+        {
+            if (ModelState.ContainsKey(nameof(WoodcarverEditViewModel.CityList)))
+            {
+                ModelState.Remove(nameof(WoodcarverEditViewModel.CityList));
+            }
+            inputModel.CityList = new SelectList(await dbContext.Cities.ToListAsync(), nameof(City.Id), nameof(City.CityName));
+
+            if (!ModelState.IsValid)
+            {
+                return View(inputModel);
+            }
+
+            var woodcarver = await dbContext.Woodcarvers
+                .Where(w => !w.IsDeleted && w.Id == inputModel.Id)
+                .FirstOrDefaultAsync();
+
+            if (woodcarver == null)
+            {
+                return NotFound();
+            }
+
+            woodcarver.FirstName = inputModel.FirstName;
+            woodcarver.LastName = inputModel.LastName;
+            woodcarver.Age = inputModel.Age;
+            woodcarver.PhoneNumber = inputModel.PhoneNumber;
+            woodcarver.CityId = inputModel.CityId;
+            woodcarver.ImageUrl = inputModel.ImageUrl;
+
+            dbContext.Woodcarvers.Update(woodcarver);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
