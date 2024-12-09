@@ -132,6 +132,46 @@ namespace WoodcarvingApp.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var woodType = await dbContext.WoodTypes
+                .Where(w => !w.IsDeleted && w.Id == id)
+                .Select(w => new WoodTypeDeleteViewModel
+                {
+                    Id = w.Id,
+                    WoodTypeName = w.WoodTypeName,
+                    ImageUrl = w.ImageUrl
+                })
+                .FirstOrDefaultAsync();
+
+            if (woodType == null)
+            {
+                return NotFound();
+            }
+
+            return View(woodType);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(WoodTypeDeleteViewModel inputModel)
+        {
+            var woodType = await dbContext.WoodTypes
+                .Where(w => !w.IsDeleted && w.Id == inputModel.Id)
+                .FirstOrDefaultAsync();
+
+            if (woodType == null)
+            {
+                return NotFound();
+            }
+
+            woodType.IsDeleted = true;
+            dbContext.WoodTypes.Update(woodType);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }
