@@ -3,25 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodcarvingApp.Web", "WoodcarvingApp.Web\WoodcarvingApp.Web.csproj", "{C3DA7F13-7F54-47D8-87A5-BD12DEC25288}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Web", "WoodcarvingApp.Web\WoodcarvingApp.Web.csproj", "{C3DA7F13-7F54-47D8-87A5-BD12DEC25288}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{3C2B562F-4170-4149-9453-3B656B710608}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{80BA4F5A-9712-4FFF-95AC-09E4291E04DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodcarvingApp.Data", "WoodcarvingApp.Data\WoodcarvingApp.Data.csproj", "{B9076D42-3B82-42A1-8CEB-A5A9F031CD3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Data", "WoodcarvingApp.Data\WoodcarvingApp.Data.csproj", "{B9076D42-3B82-42A1-8CEB-A5A9F031CD3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodcarvingApp.Data.Models", "WoodcarvingApp.Data.Models\WoodcarvingApp.Data.Models.csproj", "{D85E1B3D-1272-40D8-857B-60C51E1503F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Data.Models", "WoodcarvingApp.Data.Models\WoodcarvingApp.Data.Models.csproj", "{D85E1B3D-1272-40D8-857B-60C51E1503F0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{56B16430-4B48-4793-A092-1E216C8DF688}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodcarvingApp.Services.Data", "WoodcarvingApp.Services.Data\WoodcarvingApp.Services.Data.csproj", "{23C8937E-23FD-4A24-9D80-0613F530F73E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Services.Data", "WoodcarvingApp.Services.Data\WoodcarvingApp.Services.Data.csproj", "{23C8937E-23FD-4A24-9D80-0613F530F73E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodcarvingApp.Common", "WoodcarvingApp.Common\WoodcarvingApp.Common.csproj", "{A3C8D85C-3B77-4366-A412-6D16F8109A1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Common", "WoodcarvingApp.Common\WoodcarvingApp.Common.csproj", "{A3C8D85C-3B77-4366-A412-6D16F8109A1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodcarvingApp.Web.ViewModels", "WoodcarvingApp.Web.ViewModels\WoodcarvingApp.Web.ViewModels.csproj", "{A772DBD5-9BB0-49CF-9A95-2571983A3B41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Web.ViewModels", "WoodcarvingApp.Web.ViewModels\WoodcarvingApp.Web.ViewModels.csproj", "{A772DBD5-9BB0-49CF-9A95-2571983A3B41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodcarvingApp.Web.Infrastructure", "WoodcarvingApp.Web.Infrastructure\WoodcarvingApp.Web.Infrastructure.csproj", "{532A9506-B991-4284-8FD9-FCB6DBAE5C0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Web.Infrastructure", "WoodcarvingApp.Web.Infrastructure\WoodcarvingApp.Web.Infrastructure.csproj", "{532A9506-B991-4284-8FD9-FCB6DBAE5C0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

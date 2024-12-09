@@ -14,6 +14,7 @@ namespace WoodcarvingApp.Web.Controllers
         {
             IEnumerable<Woodcarver> allWoodcarvers = await dbContext
                 .Woodcarvers
+                .Where(w => !w.IsDeleted)
                 .ToListAsync();
 
             return View(allWoodcarvers);
@@ -151,6 +152,46 @@ namespace WoodcarvingApp.Web.Controllers
             woodcarver.CityId = inputModel.CityId;
             woodcarver.ImageUrl = inputModel.ImageUrl;
 
+            dbContext.Woodcarvers.Update(woodcarver);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var woodcarver = await dbContext.Woodcarvers
+                .Where(w => !w.IsDeleted && w.Id == id)
+                .Select(w => new WoodcarverDeleteViewModel
+                {
+                    Id = w.Id,
+                    FullName = $"{w.FirstName} {w.LastName}",
+                    ImageUrl = w.ImageUrl
+                })
+                .FirstOrDefaultAsync();
+
+            if (woodcarver == null)
+            {
+                return NotFound();
+            }
+
+            return View(woodcarver);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(WoodcarverDeleteViewModel inputModel)
+        {
+            var woodcarver = await dbContext.Woodcarvers
+                .Where(w => !w.IsDeleted && w.Id == inputModel.Id)
+                .FirstOrDefaultAsync();
+
+            if (woodcarver == null)
+            {
+                return NotFound();
+            }
+
+            woodcarver.IsDeleted = true;
             dbContext.Woodcarvers.Update(woodcarver);
             await dbContext.SaveChangesAsync();
 

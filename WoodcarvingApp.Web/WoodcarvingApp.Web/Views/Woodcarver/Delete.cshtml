@@ -1,0 +1,24 @@
+﻿@model WoodcarvingApp.Web.ViewModels.Woodcarver.WoodcarverDeleteViewModel
+
+@{
+    ViewData["Title"] = "Delete Woodcarver";
+}
+
+<div class="container mt-4">
+    <h1 class="text-danger">Delete Woodcarver</h1>
+    <p>Are you sure you want to delete this woodcarver?</p>
+
+    <div class="card mb-4">
+        <div class="card-body text-center">
+            <img src="@Model.ImageUrl" alt="@Model.FullName" class="img-fluid rounded-circle mb-3" style="width: 120px;">
+            <h3>@Model.FullName</h3>
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
