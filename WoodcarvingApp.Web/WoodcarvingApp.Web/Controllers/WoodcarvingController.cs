@@ -14,6 +14,7 @@ namespace WoodcarvingApp.Web.Controllers
         {
             IEnumerable<Woodcarving> allWoodcarving = await dbContext
                 .Woodcarvings
+                .Where(w => !w.IsDeleted)
                 .ToListAsync();
 
             return View(allWoodcarving);
