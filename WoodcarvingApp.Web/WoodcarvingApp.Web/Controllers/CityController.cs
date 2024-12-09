@@ -13,6 +13,7 @@ namespace WoodcarvingApp.Web.Controllers
         {
             IEnumerable<City> allCities = await dbContext
                 .Cities
+                .Where(w => !w.IsDeleted)
                 .ToListAsync();
 
             return View(allCities);
@@ -126,6 +127,46 @@ namespace WoodcarvingApp.Web.Controllers
             city.CityName = inputModel.CityName;
             city.ImageUrl = inputModel.ImageUrl;
 
+            dbContext.Cities.Update(city);
+            await dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var city = await dbContext.Cities
+                .Where(c => !c.IsDeleted && c.Id == id)
+                .Select(c => new CityDeleteViewModel
+                {
+                    Id = c.Id,
+                    CityName = c.CityName,
+                    ImageUrl = c.ImageUrl
+                })
+                .FirstOrDefaultAsync();
+
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            return View(city);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(CityDeleteViewModel inputModel)
+        {
+            var city = await dbContext.Cities
+                .Where(c => !c.IsDeleted && c.Id == inputModel.Id)
+                .FirstOrDefaultAsync();
+
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            city.IsDeleted = true;
             dbContext.Cities.Update(city);
             await dbContext.SaveChangesAsync();
 
