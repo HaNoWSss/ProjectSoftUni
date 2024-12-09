@@ -1,42 +1,48 @@
 ﻿@model IEnumerable<WoodcarvingApp.Data.Models.Woodcarver>
 @{
-    ViewData["Title"] = "Woodcarvers";
+	ViewData["Title"] = "Woodcarvers";
 }
 
 <div class="container mt-4">
-    <h1 class="text-center">Woodcarvers</h1>
+	<h1 class="text-center">Woodcarvers</h1>
 
-    <div class="text-end mb-3">
-        <a asp-action="Create" class="btn btn-primary">Add New Woodcarver</a>
-    </div>
+	@if (this.User?.Identity?.IsAuthenticated ?? false)
+	{
+		<div class="text-end mb-3">
+			<a asp-action="Create" class="btn btn-primary">Add New Woodcarver</a>
+		</div>
+	}
 
-    @if (Model != null && Model.Any())
-    {
-        <div class="list-group">
-            @foreach (var woodcarver in Model)
-            {
-                <div class="list-group-item d-flex align-items-center justify-content-between">
-                    <div>
-                        <img src="@woodcarver.ImageUrl" alt="@woodcarver.FirstName" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;" />
-                    </div>
+	@if (Model != null && Model.Any())
+	{
+		<div class="list-group">
+			@foreach (var woodcarver in Model)
+			{
+				<div class="list-group-item d-flex align-items-center justify-content-between">
+					<div>
+						<img src="@woodcarver.ImageUrl" alt="@woodcarver.FirstName" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;" />
+					</div>
 
-                    <div class="flex-grow-1 ms-3">
-                        <h5 class="mb-0">@woodcarver.FirstName @woodcarver.LastName</h5>
-                    </div>
+					<div class="flex-grow-1 ms-3">
+						<h5 class="mb-0">@woodcarver.FirstName @woodcarver.LastName</h5>
+					</div>
 
-                    <div>
-                        <a asp-action="Details" asp-route-id="@woodcarver.Id" class="btn btn-info btn-sm">Details</a>
-                        <a asp-action="Edit" asp-route-id="@woodcarver.Id" class="btn btn-warning btn-sm">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@woodcarver.Id" class="btn btn-danger btn-sm">Delete</a>
-                    </div>
-                </div>
-            }
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-info text-center">
-            No woodcarvers found! Click "Add New Woodcarver" to create one.
-        </div>
-    }
+					<div>
+						<a asp-action="Details" asp-route-id="@woodcarver.Id" class="btn btn-info btn-sm">Details</a>
+						@if (this.User?.Identity?.IsAuthenticated ?? false)
+						{
+							<a asp-action="Edit" asp-route-id="@woodcarver.Id" class="btn btn-warning btn-sm">Edit</a>
+							<a asp-action="Delete" asp-route-id="@woodcarver.Id" class="btn btn-danger btn-sm">Delete</a>
+						}
+					</div>
+				</div>
+			}
+		</div>
+	}
+	else
+	{
+		<div class="alert alert-info text-center">
+			No woodcarvers found! Click "Add New Woodcarver" to create one.
+		</div>
+	}
 </div>

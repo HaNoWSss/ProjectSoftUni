@@ -1,36 +1,39 @@
 ﻿@model WoodcarvingApp.Web.ViewModels.Exhibition.ExhibitionDetailsViewModel
 
 @{
-    ViewData["Title"] = $"{Model.ExhibitionName} Details";
+	ViewData["Title"] = $"{Model.ExhibitionName} Details";
 }
 
 <div class="container mt-4">
-    <h1>@Model.ExhibitionName</h1>
-    <p>@Model.Address</p>
-    <p>@Model.CityName</p>
-    <p>@Model.StartDate.ToString("d") - @Model.EndDate.ToString("d")</p>
-    @if (!string.IsNullOrEmpty(Model.ImageUrl))
-    {
-        <img src="@Model.ImageUrl" class="img-fluid mb-3" alt="@Model.ExhibitionName" style="max-height: 300px;" />
-    }
+	<h1>@Model.ExhibitionName</h1>
+	<p>@Model.Address</p>
+	<p>@Model.CityName</p>
+	<p>@Model.StartDate.ToString("d") - @Model.EndDate.ToString("d")</p>
+	@if (!string.IsNullOrEmpty(Model.ImageUrl))
+	{
+		<img src="@Model.ImageUrl" class="img-fluid mb-3" alt="@Model.ExhibitionName" style="max-height: 300px;" />
+	}
 
-    <h3>Woodcarvings</h3>
-    <div class="row">
-        @foreach (var woodcarving in Model.Woodcarvings)
-        {
-            <div class="col-lg-4 col-md-6 mb-3">
-                <div class="card">
-                    <img src="@woodcarving.ImageUrl" class="card-img-top img-fluid" alt="@woodcarving.Title" style="max-height: 200px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@woodcarving.Title</h5>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-    <div class="mt-3">
-        <a asp-action="Index" class="btn btn-secondary">Back</a>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-    </div>
+	<h3>Woodcarvings at this Exhibition:</h3>
+	<div class="row">
+		@foreach (var woodcarving in Model.Woodcarvings)
+		{
+			<div class="col-lg-4 col-md-6 mb-3">
+				<div class="card">
+					<img src="@woodcarving.ImageUrl" class="card-img-top img-fluid" alt="@woodcarving.Title" style="max-height: 200px; object-fit: cover;">
+					<div class="card-body text-center">
+						<h5 class="card-title">@woodcarving.Title</h5>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+	<div class="mt-3">
+		<a asp-action="Index" class="btn btn-secondary">Back</a>
+		@if (this.User?.Identity?.IsAuthenticated ?? false)
+		{
+			<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+			<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+		}
+	</div>
 </div>

@@ -1,43 +1,50 @@
 ﻿@model IEnumerable<WoodcarvingApp.Web.ViewModels.Exhibition.ExhibitionIndexViewModel>
 
 @{
-    ViewData["Title"] = "Exhibitions";
+	ViewData["Title"] = "Exhibitions";
 }
 
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Exhibitions</h1>
-        <a asp-action="Create" class="btn btn-primary">Add Exhibition</a>
-    </div>
 
-    @if (Model != null && Model.Any())
-    {
-    <div class="row">
-        @foreach (var exhibition in Model)
-        {
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card">
-                    @if (!string.IsNullOrEmpty(exhibition.ImageUrl))
-                    {
-                        <img src="@exhibition.ImageUrl" class="card-img-top" alt="@exhibition.ExhibitionName" style="height: 200px; object-fit: cover;">
-                    }
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@exhibition.ExhibitionName</h5>
-                        <p>@exhibition.CityName</p>
-                        <p>@exhibition.StartDate.ToString("d") - @exhibition.EndDate.ToString("d")</p>
-                        <a asp-action="Details" asp-route-id="@exhibition.Id" class="btn btn-outline-secondary">Details</a>
-                        <a asp-action="Edit" asp-route-id="@exhibition.Id" class="btn btn-outline-primary">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@exhibition.Id" class="btn btn-outline-danger">Delete</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-    }
-    else
-    {
-        <div class="alert alert-info text-center">
-            No woodcarvings found! Click "Add New Woodcarving" to create one.
-        </div>
-    }
+	@if (this.User?.Identity?.IsAuthenticated ?? false)
+	{
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h1>Exhibitions</h1>
+			<a asp-action="Create" class="btn btn-primary">Add Exhibition</a>
+		</div>
+	}
+
+	@if (Model != null && Model.Any())
+	{
+		<div class="row">
+			@foreach (var exhibition in Model)
+			{
+				<div class="col-lg-4 col-md-6 mb-4">
+					<div class="card">
+						@if (!string.IsNullOrEmpty(exhibition.ImageUrl))
+						{
+							<img src="@exhibition.ImageUrl" class="card-img-top" alt="@exhibition.ExhibitionName" style="height: 200px; object-fit: cover;">
+						}
+						<div class="card-body text-center">
+							<h5 class="card-title">@exhibition.ExhibitionName</h5>
+							<p>@exhibition.CityName</p>
+							<p>@exhibition.StartDate.ToString("d") - @exhibition.EndDate.ToString("d")</p>
+							<a asp-action="Details" asp-route-id="@exhibition.Id" class="btn btn-outline-secondary">Details</a>
+							@if (this.User?.Identity?.IsAuthenticated ?? false)
+							{
+								<a asp-action="Edit" asp-route-id="@exhibition.Id" class="btn btn-outline-primary">Edit</a>
+								<a asp-action="Delete" asp-route-id="@exhibition.Id" class="btn btn-outline-danger">Delete</a>
+							}
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	}
+	else
+	{
+		<div class="alert alert-info text-center">
+			No woodcarvings found! Click "Add New Woodcarving" to create one.
+		</div>
+	}
 </div>

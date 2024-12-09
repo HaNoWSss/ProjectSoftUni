@@ -1,42 +1,45 @@
 ﻿@model WoodcarvingApp.Web.ViewModels.Woodcarver.WoodcarverDetailsViewModel
 
 @{
-    ViewData["Title"] = $"{Model.FullName}'s Details";
+	ViewData["Title"] = $"{Model.FullName}'s Details";
 }
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-4 text-center">
-            @if (!string.IsNullOrEmpty(Model.ImageUrl))
-            {
-                <img src="@Model.ImageUrl" alt="@Model.FullName" class="img-fluid rounded" style="max-height: 400px;">
-            }
-            else
-            {
-                <img src="/images/default-placeholder.png" alt="No image available" class="img-fluid rounded" style="max-height: 400px;">
-            }
-        </div>
+	<div class="row">
+		<div class="col-md-4 text-center">
+			@if (!string.IsNullOrEmpty(Model.ImageUrl))
+			{
+				<img src="@Model.ImageUrl" alt="@Model.FullName" class="img-fluid rounded" style="max-height: 400px;">
+			}
+			else
+			{
+				<img src="/images/default-placeholder.png" alt="No image available" class="img-fluid rounded" style="max-height: 400px;">
+			}
+		</div>
 
-        <div class="col-md-8">
-            <h2>@Model.FullName</h2>
-            <hr>
-            <dl class="row">
-                <dt class="col-sm-4">City:</dt>
-                <dd class="col-sm-8">@Model.CityName</dd>
+		<div class="col-md-8">
+			<h2>@Model.FullName</h2>
+			<hr>
+			<dl class="row">
+				<dt class="col-sm-4">City:</dt>
+				<dd class="col-sm-8">@Model.CityName</dd>
 
-                <dt class="col-sm-4">Age:</dt>
-                <dd class="col-sm-8">@Model.Age</dd>
+				<dt class="col-sm-4">Age:</dt>
+				<dd class="col-sm-8">@Model.Age</dd>
 
-                <dt class="col-sm-4">Phone:</dt>
-                <dd class="col-sm-8">@Model.PhoneNumber</dd>
-            </dl>
-        </div>
-    </div>
+				<dt class="col-sm-4">Phone:</dt>
+				<dd class="col-sm-8">@Model.PhoneNumber</dd>
+			</dl>
+		</div>
+	</div>
 
-    <div class="text-end mt-4">
-        <a asp-controller="City" asp-action="Details" asp-route-id="@Model.CityId" class="btn btn-secondary">Back to City</a>
-        <a asp-controller="Woodcarver" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-secondary">Back to Woodcarvers</a>
-        <a asp-controller="Woodcarver" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-        <a asp-controller="Woodcarver" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-    </div>
+	<div class="text-end mt-4">
+		<a asp-controller="City" asp-action="Details" asp-route-id="@Model.CityId" class="btn btn-secondary">Back to City</a>
+		<a asp-controller="Woodcarver" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-secondary">Back to Woodcarvers</a>
+		@if (this.User?.Identity?.IsAuthenticated ?? false)
+		{
+			<a asp-controller="Woodcarver" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+			<a asp-controller="Woodcarver" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+		}
+	</div>
 </div>
