@@ -1,6 +1,6 @@
 ﻿namespace WoodcarvingApp.Web.ViewModels.Woodcarving
 {
-    public class DeleteWoodcarvingViewModel
+    public class WoodcarvingDeleteViewModel
     {
         public Guid Id { get; set; }
 

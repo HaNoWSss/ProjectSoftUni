@@ -2,7 +2,7 @@
 
 namespace WoodcarvingApp.Web.ViewModels.Woodcarving
 {
-    public class EditWoodcarvingViewModel
+    public class WoodcarvingEditViewModel
     {
         public Guid Id { get; set; }
 

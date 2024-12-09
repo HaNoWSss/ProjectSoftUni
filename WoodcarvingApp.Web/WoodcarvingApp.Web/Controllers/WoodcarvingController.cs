@@ -137,7 +137,7 @@ namespace WoodcarvingApp.Web.Controllers
                 return NotFound();
             }
 
-            var model = new EditWoodcarvingViewModel
+            var model = new WoodcarvingEditViewModel
             {
                 Id = woodcarving.Id,
                 Title = woodcarving.Title,
@@ -154,7 +154,7 @@ namespace WoodcarvingApp.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(EditWoodcarvingViewModel inputModel)
+        public async Task<IActionResult> Edit(WoodcarvingEditViewModel inputModel)
         {
             if (ModelState.ContainsKey(nameof(WoodcarvingCreateViewModel.WoodcarverList)))
             {
@@ -213,7 +213,7 @@ namespace WoodcarvingApp.Web.Controllers
                 return NotFound();
             }
 
-            var model = new DeleteWoodcarvingViewModel
+            var model = new WoodcarvingDeleteViewModel
             {
                 Id = woodcarving.Id,
                 Title = woodcarving.Title,
