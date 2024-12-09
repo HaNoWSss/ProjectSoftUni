@@ -1,0 +1,53 @@
+﻿@model WoodcarvingApp.Web.ViewModels.Woodcarving.EditWoodcarvingViewModel
+
+@{
+    ViewData["Title"] = "Edit Woodcarving";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Edit Woodcarving</h1>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="WoodcarverId" class="form-label">Woodcarver</label>
+            <select asp-for="WoodcarverId" asp-items="Model.WoodcarverList" class="form-select"></select>
+            <span asp-validation-for="WoodcarverId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="WoodTypeId" class="form-label">Wood Type</label>
+            <select asp-for="WoodTypeId" asp-items="Model.WoodTypeList" class="form-select"></select>
+            <span asp-validation-for="WoodTypeId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageUrl" class="form-label">Image URL</label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input asp-for="IsAvailable" class="form-check-input" type="checkbox" />
+            <label asp-for="IsAvailable" class="form-check-label">Available</label>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
