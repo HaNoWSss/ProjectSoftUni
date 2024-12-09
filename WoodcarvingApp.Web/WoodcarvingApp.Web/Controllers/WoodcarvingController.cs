@@ -85,5 +85,44 @@ namespace WoodcarvingApp.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var woodcarving = await dbContext.Woodcarvings
+                .Include(w => w.Woodcarver)
+                .Include(w => w.WoodType)
+                .Include(w => w.WoodcarvingExhibitions)
+                    .ThenInclude(we => we.Exhibition)
+                .Where(w => !w.IsDeleted && w.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (woodcarving == null)
+            {
+                return NotFound();
+            }
+
+            var model = new WoodcarvingDetailsViewModel
+            {
+                Id = woodcarving.Id,
+                Title = woodcarving.Title,
+                Description = woodcarving.Description,
+                WoodcarverName = $"{woodcarving.Woodcarver.FirstName} {woodcarving.Woodcarver.LastName}",
+                WoodTypeName = woodcarving.WoodType.WoodTypeName,
+                ImageUrl = woodcarving.ImageUrl,
+                IsAvailable = woodcarving.IsAvailable,
+                Exhibitions = woodcarving.WoodcarvingExhibitions
+                    .Select(we => new ExhibitionViewModel
+                    {
+                        Id = we.Exhibition.Id,
+                        ExhibitionName = we.Exhibition.ExhibitionName,
+                        StartDate = we.Exhibition.StartDate,
+                        EndDate = we.Exhibition.EndDate
+                    })
+                    .ToList()
+            };
+
+            return View(model);
+        }
+
     }
 }
