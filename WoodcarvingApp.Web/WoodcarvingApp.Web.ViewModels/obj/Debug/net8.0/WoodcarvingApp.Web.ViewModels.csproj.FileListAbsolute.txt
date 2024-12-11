@@ -19,9 +19,13 @@ C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Web.ViewModels.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Web.ViewModels.pdb
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Common.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Data.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Data.Models.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Services.Mapping.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Common.pdb
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Data.Models.pdb
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Data.pdb
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Services.Mapping.pdb
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug\net8.0\WoodcarvingApp.Web.ViewModels.csproj.AssemblyReference.cache
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug\net8.0\WoodcarvingApp.Web.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug\net8.0\WoodcarvingApp.Web.ViewModels.AssemblyInfoInputs.cache
@@ -33,5 +37,3 @@ C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug\net8.0\refint\WoodcarvingApp.Web.ViewModels.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug\net8.0\WoodcarvingApp.Web.ViewModels.pdb
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\obj\Debug\net8.0\ref\WoodcarvingApp.Web.ViewModels.dll
-C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Data.dll
-C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web.ViewModels\bin\Debug\net8.0\WoodcarvingApp.Data.pdb

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WoodcarvingApp.Services.Mapping;
 
 namespace WoodcarvingApp.Web.ViewModels.WoodType
 {
-    public class WoodTypeCreateViewModel
+    public class WoodTypeCreateViewModel : IMapTo<WoodcarvingApp.Data.Models.WoodType>
     {
         [Required]
         [StringLength(20, ErrorMessage = "The name must not exceed 20 characters.")]

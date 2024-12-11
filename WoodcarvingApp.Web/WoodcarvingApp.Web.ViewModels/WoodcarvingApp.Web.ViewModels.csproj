@@ -10,6 +10,7 @@
 		<ProjectReference Include="..\WoodcarvingApp.Common\WoodcarvingApp.Common.csproj" />
 		<ProjectReference Include="..\WoodcarvingApp.Data.Models\WoodcarvingApp.Data.Models.csproj" />
 		<ProjectReference Include="..\WoodcarvingApp.Data\WoodcarvingApp.Data.csproj" />
+		<ProjectReference Include="..\WoodcarvingApp.Services.Mapping\WoodcarvingApp.Services.Mapping.csproj" />
 	<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
