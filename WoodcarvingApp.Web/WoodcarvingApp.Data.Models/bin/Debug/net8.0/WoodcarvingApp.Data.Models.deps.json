@@ -9,7 +9,8 @@
       "WoodcarvingApp.Data.Models/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http": "2.1.34",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.10"
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.10",
+          "WoodcarvingApp.Common": "1.0.0"
         },
         "runtime": {
           "WoodcarvingApp.Data.Models.dll": {}
@@ -278,7 +279,15 @@
         }
       },
       "System.Buffers/4.5.0": {},
-      "System.Text.Encodings.Web/4.5.0": {}
+      "System.Text.Encodings.Web/4.5.0": {},
+      "WoodcarvingApp.Common/1.0.0": {
+        "runtime": {
+          "WoodcarvingApp.Common.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
     }
   },
   "libraries": {
@@ -468,6 +477,11 @@
       "sha512": "sha512-Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
       "path": "system.text.encodings.web/4.5.0",
       "hashPath": "system.text.encodings.web.4.5.0.nupkg.sha512"
+    },
+    "WoodcarvingApp.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

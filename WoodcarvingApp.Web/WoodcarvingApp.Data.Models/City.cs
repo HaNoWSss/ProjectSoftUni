@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static WoodcarvingApp.Common.ApplicationConstants;
 
 namespace WoodcarvingApp.Data.Models
 {
@@ -9,9 +10,12 @@ namespace WoodcarvingApp.Data.Models
         public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
-        [Column(TypeName = "NVARCHAR(20)")]
+        [Column(TypeName = "NVARCHAR(50)")]
+        [StringLength(NameMaxLength)]
         public string CityName { get; set; } = null!;
 
+        [Column(TypeName = "NVARCHAR(255)")]
+        [StringLength(UrlMaxLength)]
         public string? ImageUrl { get; set; }
 
         public bool IsDeleted { get; set; }

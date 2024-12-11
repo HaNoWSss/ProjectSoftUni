@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static WoodcarvingApp.Common.ApplicationConstants;
 
 namespace WoodcarvingApp.Data.Models
 {
@@ -9,11 +10,14 @@ namespace WoodcarvingApp.Data.Models
         public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
-        [Column(TypeName = "NVARCHAR(20)")]
+        [Column(TypeName = "NVARCHAR(50)")]
+        [StringLength(NameMaxLength)]
+
         public string FirstName { get; set; } = null!;
 
         [Required]
-        [Column(TypeName = "NVARCHAR(20)")]
+        [Column(TypeName = "NVARCHAR(50)")]
+        [StringLength(NameMaxLength)]
         public string LastName { get; set; } = null!;
 
         public Guid CityId { get; set; }
@@ -23,12 +27,15 @@ namespace WoodcarvingApp.Data.Models
         public virtual City City { get; set; } = null!;
 
         [Required]
+        [Range(1, 120)]
         public int Age { get; set; }
 
         [Required]
-        [RegularExpression(@"^\+(\d{1,3})[-.\s]?(\d{1,4}[-.\s]?)*\d{4,15}$")]
+        [RegularExpression(PhoneNumberRegex)]
         public string PhoneNumber { get; set; } = null!;
 
+        [Column(TypeName = "VARCHAR(255)")]
+        [StringLength(UrlMaxLength)]
         public string? ImageUrl { get; set; }
 
         public bool IsDeleted { get; set; }

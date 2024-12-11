@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static WoodcarvingApp.Common.ApplicationConstants;
 
 namespace WoodcarvingApp.Data.Models
 {
@@ -8,12 +9,13 @@ namespace WoodcarvingApp.Data.Models
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Required(ErrorMessage = "Please enter the title of the woodcarving")]
-        [Column(TypeName = "NVARCHAR(40)")]
+        [Required]
+        [Column(TypeName = "NVARCHAR(50)")]
+        [StringLength(TitleMaxLength)]
         public string Title { get; set; } = null!;
 
-        [Required]
-        [Column(TypeName = "NVARCHAR(MAX)")]
+        [StringLength(DescriptionMaxLength)]
+        [Column(TypeName = "NVARCHAR(1000)")]
         public string? Description { get; set; }
 
         public Guid WoodcarverId { get; set; }
