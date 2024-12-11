@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WoodcarvingApp.Web.Data;
 
@@ -11,9 +12,11 @@ using WoodcarvingApp.Web.Data;
 namespace WoodcarvingApp.Data.Migrations
 {
     [DbContext(typeof(WoodcarvingDbContext))]
-    partial class WoodcarvingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241211183328_ModifiedValidationForAllEntityModels")]
+    partial class ModifiedValidationForAllEntityModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
