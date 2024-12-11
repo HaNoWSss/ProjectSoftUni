@@ -1,0 +1,13 @@
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\bin\Debug\net8.0\WoodcarvingApp.Services.Mapping.deps.json
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\bin\Debug\net8.0\WoodcarvingApp.Services.Mapping.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\bin\Debug\net8.0\WoodcarvingApp.Services.Mapping.pdb
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\WoodcarvingApp.Services.Mapping.csproj.AssemblyReference.cache
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\WoodcarvingApp.Services.Mapping.GeneratedMSBuildEditorConfig.editorconfig
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\WoodcarvingApp.Services.Mapping.AssemblyInfoInputs.cache
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\WoodcarvingApp.Services.Mapping.AssemblyInfo.cs
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\WoodcarvingApp.Services.Mapping.csproj.CoreCompileInputs.cache
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\WoodcarvingApp.Services.Mapping.sourcelink.json
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\WoodcarvingApp.Services.Mapping.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\refint\WoodcarvingApp.Services.Mapping.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\WoodcarvingApp.Services.Mapping.pdb
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Services.Mapping\obj\Debug\net8.0\ref\WoodcarvingApp.Services.Mapping.dll
