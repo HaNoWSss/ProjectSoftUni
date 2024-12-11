@@ -314,6 +314,7 @@ C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\Woo
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Web.runtimeconfig.json
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Web.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Web.pdb
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\AutoMapper.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\Azure.Core.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\Azure.Identity.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\Humanizer.dll
@@ -581,6 +582,7 @@ C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\Woo
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Data.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Data.Models.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Services.Data.dll
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Services.Mapping.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Web.Infrastructure.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Web.ViewModels.dll
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Common.pdb
@@ -589,6 +591,7 @@ C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\Woo
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Web.Infrastructure.pdb
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Web.ViewModels.pdb
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Data.Models.pdb
+C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\bin\Debug\net8.0\WoodcarvingApp.Services.Mapping.pdb
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\obj\Debug\net8.0\WoodcarvingApp.Web.csproj.AssemblyReference.cache
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\obj\Debug\net8.0\WoodcarvingApp.Web.GeneratedMSBuildEditorConfig.editorconfig
 C:\uni\ProjectSoftUni\WoodcarvingApp.Web\WoodcarvingApp.Web\obj\Debug\net8.0\WoodcarvingApp.Web.AssemblyInfoInputs.cache

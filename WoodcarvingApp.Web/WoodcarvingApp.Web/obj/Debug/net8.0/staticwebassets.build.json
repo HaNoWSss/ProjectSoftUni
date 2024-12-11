@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VUSKM9lfSxbYOcAvpm2WqR5tS+RUfnj4DxSYj0sJQfI=",
+  "Hash": "XYAyd8NhnSY3NIsfo4HM2mxhdBZql/+sfrZZ5Wz0ktY=",
   "Source": "WoodcarvingApp.Web",
   "BasePath": "_content/WoodcarvingApp.Web",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\images\\woodcarving-image-not-added.png",
+      "SourceId": "WoodcarvingApp.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\",
+      "BasePath": "_content/WoodcarvingApp.Web",
+      "RelativePath": "images/woodcarving-image-not-added.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\woodcarving-image-not-added.png"
     },
     {
       "Identity": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\js\\site.js",

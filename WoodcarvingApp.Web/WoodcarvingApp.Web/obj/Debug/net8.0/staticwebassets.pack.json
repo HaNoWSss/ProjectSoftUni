@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\images\\woodcarving-image-not-added.png",
+      "PackagePath": "staticwebassets\\images\\woodcarving-image-not-added.png"
+    },
+    {
       "Id": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
