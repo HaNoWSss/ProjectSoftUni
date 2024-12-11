@@ -21,17 +21,19 @@
             <textarea asp-for="Description" class="form-control"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-
         <div class="mb-3">
-            <label asp-for="WoodcarverId" class="form-label">Woodcarver</label>
-            <select asp-for="WoodcarverId" asp-items="Model.WoodcarverList" class="form-select"></select>
-            <span asp-validation-for="WoodcarverId" class="text-danger"></span>
+            <label asp-for="@Model.WoodcarverId" class="form-label-add-edit">Select Woodcarver</label>
+            <select asp-for="@Model.WoodcarverId" class="form-control" aria-required="true" asp-items="@(new SelectList(Model.Woodcarvers, "Id", "FullName"))">
+                <option value="">Select Woodcarver...</option>
+            </select>
+            <span asp-validation-for="@Model.WoodcarverId" class="text-danger"></span>
         </div>
-
         <div class="mb-3">
-            <label asp-for="WoodTypeId" class="form-label">Wood Type</label>
-            <select asp-for="WoodTypeId" asp-items="Model.WoodTypeList" class="form-select"></select>
-            <span asp-validation-for="WoodTypeId" class="text-danger"></span>
+            <label asp-for="@Model.WoodTypeId" class="form-label-add-edit">Select Wood Type</label>
+            <select asp-for="@Model.WoodTypeId" class="form-control" aria-required="true" asp-items="@(new SelectList(Model.WoodTypes, "Id", "WoodTypeName"))">
+                <option value="">Select Wood Type...</option>
+            </select>
+            <span asp-validation-for="@Model.WoodTypeId" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
