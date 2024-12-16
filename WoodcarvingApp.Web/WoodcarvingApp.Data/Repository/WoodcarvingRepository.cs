@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WoodcarvingApp.Data.Models;
 using WoodcarvingApp.Data.Repository;
 using WoodcarvingApp.Data.Repository.Interfaces;
@@ -13,26 +12,21 @@ public class WoodcarvingRepository : BaseRepository<Woodcarving, Guid>, IWoodcar
     {
         this.dbContext = dbContext;
     }
-
-    public async Task<SelectList> GetWoodcarverListAsync()
+    public async Task<IEnumerable<Woodcarver>> GetWoodcarverListAsync()
     {
-        var woodcarvers = await dbContext.Woodcarvers.ToListAsync();
-        return new SelectList(woodcarvers, nameof(Woodcarver.Id), nameof(Woodcarver.FirstName));
+        var woodcarvers = await dbContext.Woodcarvers
+            .Where(w => !w.IsDeleted)
+            .ToListAsync();
+
+        return woodcarvers;
     }
 
-    public async Task<SelectList> GetWoodTypeListAsync()
+    public async Task<IEnumerable<WoodType>> GetWoodTypeListAsync()
     {
-        var woodTypes = await dbContext.WoodTypes.ToListAsync();
-        return new SelectList(woodTypes, nameof(WoodType.Id), nameof(WoodType.WoodTypeName));
-    }
+        var woodTypes = await dbContext.WoodTypes
+            .Where(w => !w.IsDeleted)
+            .ToListAsync();
 
-    public async Task<bool> WoodcarverExistsAsync(Guid woodcarverId)
-    {
-        return await dbContext.Woodcarvers.AnyAsync(w => w.Id == woodcarverId);
-    }
-
-    public async Task<bool> WoodTypeExistsAsync(Guid woodTypeId)
-    {
-        return await dbContext.WoodTypes.AnyAsync(w => w.Id == woodTypeId);
+        return woodTypes;
     }
 }

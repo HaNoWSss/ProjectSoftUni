@@ -21,6 +21,7 @@
         void Add(TType item);
 
         Task AddAsync(TType item);
+        Task<bool> AddAsyncBool(TType item);
 
         void AddRange(TType[] items);
 

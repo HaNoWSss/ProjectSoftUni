@@ -75,6 +75,19 @@
             await this.dbSet.AddAsync(item);
             await this.dbContext.SaveChangesAsync();
         }
+        public async Task<bool> AddAsyncBool(TType item)
+        {
+            try
+            {
+                await this.dbSet.AddAsync(item);
+                await this.dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public void AddRange(TType[] items)
         {
