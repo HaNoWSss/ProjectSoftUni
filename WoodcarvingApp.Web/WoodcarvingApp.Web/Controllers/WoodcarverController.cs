@@ -1,209 +1,129 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using WoodcarvingApp.Data.Models;
-using WoodcarvingApp.Web.Data;
+using WoodcarvingApp.Services.Data.Interfaces;
 using WoodcarvingApp.Web.ViewModels.Woodcarver;
 
 namespace WoodcarvingApp.Web.Controllers
 {
-	public class WoodcarverController(WoodcarvingDbContext dbContext) : BaseController
-	{
-		[HttpGet]
-		public async Task<IActionResult> Index()
-		{
-			IEnumerable<Woodcarver> allWoodcarvers = await dbContext
-				.Woodcarvers
-				.Where(w => !w.IsDeleted)
-				.ToListAsync();
+    public class WoodcarverController(IWoodcarverService woodcarverService) : BaseController
+    {
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var woodcarvers = await woodcarverService.GetAllWoodcarversAsync();
+            return View(woodcarvers);
+        }
 
-			return View(allWoodcarvers);
-		}
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Create()
+        {
+            var model = await woodcarverService.GetWoodcarverCreateModelAsync();
+            return View(model);
+        }
 
-		[HttpGet]
-		[Authorize]
-		public IActionResult Create()
-		{
-			var cities = dbContext.Cities;
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Create(WoodcarverCreateViewModel inputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var model = await woodcarverService.GetWoodcarverCreateModelAsync();
+                inputModel.Cities = model?.Cities;
 
-			var model = new WoodcarverCreateViewModel()
-			{
-				CityList = new SelectList(cities, nameof(City.Id), nameof(City.CityName))
-			};
+                return View(inputModel);
+            }
 
-			return View(model);
-		}
+            var success = await woodcarverService.CreateWoodcarverAsync(inputModel);
+            if (!success)
+            {
+                ModelState.AddModelError("", "Failed to create woodcarver. Please check your inputs.");
+                var model = await woodcarverService.GetWoodcarverCreateModelAsync();
+                inputModel.Cities = model?.Cities;
+                return View(inputModel);
+            }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		[Authorize]
-		public async Task<IActionResult> Create(WoodcarverCreateViewModel inputModel)
-		{
-			if (ModelState.ContainsKey(nameof(WoodcarverCreateViewModel.CityList)))
-			{
-				ModelState.Remove(nameof(WoodcarverCreateViewModel.CityList));
-			}
-			inputModel.CityList = new SelectList(await dbContext.Cities.ToListAsync(), nameof(City.Id), nameof(City.CityName));
+            return RedirectToAction(nameof(Index));
+        }
 
-			if (!ModelState.IsValid)
-			{
-				return View(inputModel);
-			}
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var woodcarverDetails = await woodcarverService.GetWoodcarverDetailsAsync(id);
 
-			if (!dbContext.Cities.Any(c => c.Id == inputModel.CityId))
-			{
-				ModelState.AddModelError(nameof(inputModel.CityId), "Invalid city selected.");
-				return View(inputModel);
-			}
+            if (woodcarverDetails == null)
+            {
+                return NotFound();
+            }
 
-			var woodcarver = new Woodcarver
-			{
-				FirstName = inputModel.FirstName,
-				LastName = inputModel.LastName,
-				CityId = inputModel.CityId,
-				Age = inputModel.Age,
-				PhoneNumber = inputModel.PhoneNumber,
-				ImageUrl = inputModel.ImageUrl,
-				IsDeleted = false
-			};
+            return View(woodcarverDetails);
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var woodcarverEditModel = await woodcarverService.GetWoodcarverForEditAsync(id);
 
-			await dbContext.Woodcarvers.AddAsync(woodcarver);
-			await dbContext.SaveChangesAsync();
+            if (woodcarverEditModel == null)
+            {
+                return NotFound();
+            }
 
-			return RedirectToAction(nameof(Index));
-		}
+            return View(woodcarverEditModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Edit(WoodcarverEditViewModel inputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var model = await woodcarverService.GetWoodcarverCreateModelAsync();
+                inputModel.Cities = model?.Cities;
 
-		[HttpGet]
-		public async Task<IActionResult> Details(Guid id)
-		{
-			var woodcarver = await dbContext.Woodcarvers
-				.Include(w => w.City)
-				.FirstOrDefaultAsync(w => w.Id == id && !w.IsDeleted);
+                return View(inputModel);
+            }
 
-			if (woodcarver == null)
-			{
-				return NotFound();
-			}
+            var success = await woodcarverService.UpdateWoodcarverAsync(inputModel);
+            if (!success)
+            {
+                ModelState.AddModelError("", "Failed to update woodcarver. Please check your inputs.");
+                var model = await woodcarverService.GetWoodcarverCreateModelAsync();
+                inputModel.Cities = model?.Cities;
+                return View(inputModel);
+            }
 
-			var model = new WoodcarverDetailsViewModel
-			{
-				Id = woodcarver.Id,
-				FullName = $"{woodcarver.FirstName} {woodcarver.LastName}",
-				ImageUrl = woodcarver.ImageUrl,
-				CityId = woodcarver.CityId,
-				CityName = woodcarver.City.CityName,
-				Age = woodcarver.Age,
-				PhoneNumber = woodcarver.PhoneNumber
-			};
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var deleteModel = await woodcarverService.GetWoodcarverForDeleteAsync(id);
 
-			return View(model);
-		}
-		[HttpGet]
-		[Authorize]
-		public async Task<IActionResult> Edit(Guid id)
-		{
-			var woodcarver = await dbContext.Woodcarvers
-				.Where(w => !w.IsDeleted && w.Id == id)
-				.Select(w => new WoodcarverEditViewModel
-				{
-					Id = w.Id,
-					FirstName = w.FirstName,
-					LastName = w.LastName,
-					Age = w.Age,
-					PhoneNumber = w.PhoneNumber,
-					CityId = w.CityId,
-					ImageUrl = w.ImageUrl,
-					CityList = new SelectList(dbContext.Cities.Where(c => !c.IsDeleted).ToList(), nameof(City.Id), nameof(City.CityName))
-				})
-				.FirstOrDefaultAsync();
+            if (deleteModel == null)
+            {
+                return NotFound();
+            }
 
-			if (woodcarver == null)
-			{
-				return NotFound();
-			}
+            return View(deleteModel);
+        }
 
-			return View(woodcarver);
-		}
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		[Authorize]
-		public async Task<IActionResult> Edit(WoodcarverEditViewModel inputModel)
-		{
-			if (ModelState.ContainsKey(nameof(WoodcarverEditViewModel.CityList)))
-			{
-				ModelState.Remove(nameof(WoodcarverEditViewModel.CityList));
-			}
-			inputModel.CityList = new SelectList(await dbContext.Cities.ToListAsync(), nameof(City.Id), nameof(City.CityName));
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            var success = await woodcarverService.DeleteWoodcarverAsync(id);
 
-			if (!ModelState.IsValid)
-			{
-				return View(inputModel);
-			}
+            if (!success)
+            {
+                return NotFound();
+            }
 
-			var woodcarver = await dbContext.Woodcarvers
-				.Where(w => !w.IsDeleted && w.Id == inputModel.Id)
-				.FirstOrDefaultAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
-			if (woodcarver == null)
-			{
-				return NotFound();
-			}
-
-			woodcarver.FirstName = inputModel.FirstName;
-			woodcarver.LastName = inputModel.LastName;
-			woodcarver.Age = inputModel.Age;
-			woodcarver.PhoneNumber = inputModel.PhoneNumber;
-			woodcarver.CityId = inputModel.CityId;
-			woodcarver.ImageUrl = inputModel.ImageUrl;
-
-			dbContext.Woodcarvers.Update(woodcarver);
-			await dbContext.SaveChangesAsync();
-
-			return RedirectToAction(nameof(Index));
-		}
-		[HttpGet]
-		[Authorize]
-		public async Task<IActionResult> Delete(Guid id)
-		{
-			var woodcarver = await dbContext.Woodcarvers
-				.Where(w => !w.IsDeleted && w.Id == id)
-				.Select(w => new WoodcarverDeleteViewModel
-				{
-					Id = w.Id,
-					FullName = $"{w.FirstName} {w.LastName}",
-					ImageUrl = w.ImageUrl
-				})
-				.FirstOrDefaultAsync();
-
-			if (woodcarver == null)
-			{
-				return NotFound();
-			}
-
-			return View(woodcarver);
-		}
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		[Authorize]
-		public async Task<IActionResult> Delete(WoodcarverDeleteViewModel inputModel)
-		{
-			var woodcarver = await dbContext.Woodcarvers
-				.Where(w => !w.IsDeleted && w.Id == inputModel.Id)
-				.FirstOrDefaultAsync();
-
-			if (woodcarver == null)
-			{
-				return NotFound();
-			}
-
-			woodcarver.IsDeleted = true;
-			dbContext.Woodcarvers.Update(woodcarver);
-			await dbContext.SaveChangesAsync();
-
-			return RedirectToAction(nameof(Index));
-		}
-
-	}
+    }
 }

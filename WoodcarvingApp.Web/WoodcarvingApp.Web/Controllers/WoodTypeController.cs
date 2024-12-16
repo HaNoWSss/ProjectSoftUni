@@ -1,28 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WoodcarvingApp.Data.Models;
-using WoodcarvingApp.Services.Mapping;
-using WoodcarvingApp.Web.Data;
+using WoodcarvingApp.Services.Data.Interfaces;
 using WoodcarvingApp.Web.ViewModels.WoodType;
 
 namespace WoodcarvingApp.Web.Controllers
 {
-    public class WoodTypeController(WoodcarvingDbContext dbContext) : BaseController
+    public class WoodTypeController(IWoodTypeService woodTypeService) : BaseController
     {
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var woodTypes = await dbContext.WoodTypes
-                .Where(w => !w.IsDeleted)
-                .Select(w => new WoodTypeIndexViewModel
-                {
-                    Id = w.Id,
-                    WoodTypeName = w.WoodTypeName,
-                    ImageUrl = w.ImageUrl
-                })
-                .ToListAsync();
-
+            var woodTypes = await woodTypeService.GetAllWoodTypesAsync();
             return View(woodTypes);
         }
 
@@ -44,11 +32,12 @@ namespace WoodcarvingApp.Web.Controllers
                 return View(model);
             }
 
-            var woodType = new WoodType();
-            AutoMapperConfig.MapperInstance.Map(model, woodType);
+            var success = await woodTypeService.CreateWoodTypeAsync(model);
 
-            await dbContext.WoodTypes.AddAsync(woodType);
-            await dbContext.SaveChangesAsync();
+            if (!success)
+            {
+                return View(model);
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -56,51 +45,27 @@ namespace WoodcarvingApp.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-            var woodType = await dbContext.WoodTypes
-                .Where(w => !w.IsDeleted && w.Id == id)
-                .FirstOrDefaultAsync();
+            var woodType = await woodTypeService.GetWoodTypeDetailsAsync(id);
 
             if (woodType == null)
             {
                 return NotFound();
             }
 
-            var model = new WoodTypeDetailsViewModel
-            {
-                Id = woodType.Id,
-                WoodTypeName = woodType.WoodTypeName,
-                Description = woodType.Description,
-                Hardness = woodType.Hardness,
-                Color = woodType.Color,
-                ImageUrl = woodType.ImageUrl
-            };
-
-            return View(model);
+            return View(woodType);
         }
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var woodType = await dbContext.WoodTypes
-                .Where(w => !w.IsDeleted && w.Id == id)
-                .FirstOrDefaultAsync();
+            var woodType = await woodTypeService.GetWoodTypeForEditAsync(id);
 
             if (woodType == null)
             {
                 return NotFound();
             }
 
-            var viewModel = new WoodTypeEditViewModel
-            {
-                Id = woodType.Id,
-                WoodTypeName = woodType.WoodTypeName,
-                Description = woodType.Description,
-                Hardness = woodType.Hardness,
-                Color = woodType.Color,
-                ImageUrl = woodType.ImageUrl
-            };
-
-            return View(viewModel);
+            return View(woodType);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -112,23 +77,12 @@ namespace WoodcarvingApp.Web.Controllers
                 return View(inputModel);
             }
 
-            var woodType = await dbContext.WoodTypes
-                .Where(w => !w.IsDeleted && w.Id == inputModel.Id)
-                .FirstOrDefaultAsync();
+            var success = await woodTypeService.UpdateWoodTypeAsync(inputModel);
 
-            if (woodType == null)
+            if (!success)
             {
                 return NotFound();
             }
-
-            woodType.WoodTypeName = inputModel.WoodTypeName;
-            woodType.Description = inputModel.Description;
-            woodType.Hardness = inputModel.Hardness;
-            woodType.Color = inputModel.Color;
-            woodType.ImageUrl = inputModel.ImageUrl;
-
-            dbContext.WoodTypes.Update(woodType);
-            await dbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
@@ -136,15 +90,7 @@ namespace WoodcarvingApp.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var woodType = await dbContext.WoodTypes
-                .Where(w => !w.IsDeleted && w.Id == id)
-                .Select(w => new WoodTypeDeleteViewModel
-                {
-                    Id = w.Id,
-                    WoodTypeName = w.WoodTypeName,
-                    ImageUrl = w.ImageUrl
-                })
-                .FirstOrDefaultAsync();
+            var woodType = await woodTypeService.GetWoodTypeForDeleteAsync(id);
 
             if (woodType == null)
             {
@@ -159,18 +105,12 @@ namespace WoodcarvingApp.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(WoodTypeDeleteViewModel inputModel)
         {
-            var woodType = await dbContext.WoodTypes
-                .Where(w => !w.IsDeleted && w.Id == inputModel.Id)
-                .FirstOrDefaultAsync();
+            var success = await woodTypeService.DeleteWoodTypeAsync(inputModel.Id);
 
-            if (woodType == null)
+            if (!success)
             {
                 return NotFound();
             }
-
-            woodType.IsDeleted = true;
-            dbContext.WoodTypes.Update(woodType);
-            await dbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }

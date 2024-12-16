@@ -1,184 +1,112 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WoodcarvingApp.Data.Models;
-using WoodcarvingApp.Web.Data;
+using WoodcarvingApp.Services.Data.Interfaces;
 using WoodcarvingApp.Web.ViewModels.City;
 
 namespace WoodcarvingApp.Web.Controllers
 {
-	public class CityController(WoodcarvingDbContext dbContext) : Controller
-	{
-		[HttpGet]
-		public async Task<IActionResult> Index()
-		{
-			IEnumerable<City> allCities = await dbContext
-				.Cities
-				.Where(w => !w.IsDeleted)
-				.ToListAsync();
+    public class CityController(ICityService cityService) : BaseController
+    {
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            IEnumerable<CityIndexViewModel> cities = await cityService.GetAllCitiesAsync();
+            return View(cities);
+        }
 
-			return View(allCities);
-		}
+        [HttpGet]
+        [Authorize]
+        public IActionResult Create()
+        {
+            return View(new CityCreateViewModel());
+        }
 
-		[HttpGet]
-		[Authorize]
-		public IActionResult Create()
-		{
-			return View(new CityCreateViewModel());
-		}
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Create(CityCreateViewModel inputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(inputModel);
+            }
 
-		[HttpPost]
-		[Authorize]
-		public async Task<IActionResult> Create(CityCreateViewModel inputModel)
-		{
-			if (!ModelState.IsValid)
-			{
-				return View(inputModel);
-			}
+            await cityService.CreateCityAsync(inputModel);
 
-			var city = new City
-			{
-				CityName = inputModel.CityName,
-				ImageUrl = inputModel.ImageUrl
-			};
+            return RedirectToAction(nameof(Index));
+        }
 
-			await dbContext.Cities.AddAsync(city);
-			await dbContext.SaveChangesAsync();
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var cityDetails = await cityService.GetCityDetailsAsync(id);
 
-			return RedirectToAction(nameof(Index));
-		}
+            if (cityDetails == null)
+            {
+                return NotFound();
+            }
 
-		[HttpGet]
-		public async Task<IActionResult> Details(Guid id)
-		{
-			var city = await dbContext.Cities
-				.Include(c => c.Woodcarvers)
-				.Include(c => c.Exhibitions)
-				.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
+            return View(cityDetails);
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var cityEditModel = await cityService.GetCityEditModelAsync(id);
 
-			if (city == null)
-			{
-				return NotFound();
-			}
+            if (cityEditModel == null)
+            {
+                return NotFound();
+            }
 
-			var model = new CityDetailsViewModel
-			{
-				Id = city.Id,
-				CityName = city.CityName,
-				ImageUrl = city.ImageUrl,
-				Woodcarvers = city.Woodcarvers
-					.Where(w => !w.IsDeleted)
-					.Select(w => new CityWoodcarverViewModel
-					{
-						Id = w.Id,
-						FullName = $"{w.FirstName} {w.LastName}",
-						ImageUrl = w.ImageUrl
-					})
-					.ToList(),
-				Exhibitions = city.Exhibitions
-					.Where(e => !e.IsDeleted)
-					.Select(e => new CityExhibitionViewModel
-					{
-						Id = e.Id,
-						Name = e.ExhibitionName,
-						ImageUrl = e.ImageUrl
-					})
-					.ToList()
-			};
+            return View(cityEditModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Edit(CityEditViewModel inputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(inputModel);
+            }
 
-			return View(model);
-		}
-		[HttpGet]
-		[Authorize]
-		public async Task<IActionResult> Edit(Guid id)
-		{
-			var city = await dbContext.Cities
-				.Where(c => !c.IsDeleted && c.Id == id)
-				.FirstOrDefaultAsync();
+            var success = await cityService.EditCityAsync(inputModel);
 
-			if (city == null)
-			{
-				return NotFound();
-			}
+            if (!success)
+            {
+                return NotFound();
+            }
 
-			var viewModel = new CityEditViewModel
-			{
-				Id = city.Id,
-				CityName = city.CityName,
-				ImageUrl = city.ImageUrl
-			};
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var cityDeleteModel = await cityService.GetCityDeleteModelAsync(id);
 
-			return View(viewModel);
-		}
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		[Authorize]
-		public async Task<IActionResult> Edit(CityEditViewModel inputModel)
-		{
-			if (!ModelState.IsValid)
-			{
-				return View(inputModel);
-			}
+            if (cityDeleteModel == null)
+            {
+                return NotFound();
+            }
 
-			var city = await dbContext.Cities
-				.Where(c => !c.IsDeleted && c.Id == inputModel.Id)
-				.FirstOrDefaultAsync();
+            return View(cityDeleteModel);
+        }
 
-			if (city == null)
-			{
-				return NotFound();
-			}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Delete(CityDeleteViewModel inputModel)
+        {
+            var success = await cityService.DeleteCityAsync(inputModel.Id);
 
-			city.CityName = inputModel.CityName;
-			city.ImageUrl = inputModel.ImageUrl;
+            if (!success)
+            {
+                return NotFound();
+            }
 
-			dbContext.Cities.Update(city);
-			await dbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
-			return RedirectToAction(nameof(Index));
-		}
-		[HttpGet]
-		[Authorize]
-		public async Task<IActionResult> Delete(Guid id)
-		{
-			var city = await dbContext.Cities
-				.Where(c => !c.IsDeleted && c.Id == id)
-				.Select(c => new CityDeleteViewModel
-				{
-					Id = c.Id,
-					CityName = c.CityName,
-					ImageUrl = c.ImageUrl
-				})
-				.FirstOrDefaultAsync();
-
-			if (city == null)
-			{
-				return NotFound();
-			}
-
-			return View(city);
-		}
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		[Authorize]
-		public async Task<IActionResult> Delete(CityDeleteViewModel inputModel)
-		{
-			var city = await dbContext.Cities
-				.Where(c => !c.IsDeleted && c.Id == inputModel.Id)
-				.FirstOrDefaultAsync();
-
-			if (city == null)
-			{
-				return NotFound();
-			}
-
-			city.IsDeleted = true;
-			dbContext.Cities.Update(city);
-			await dbContext.SaveChangesAsync();
-
-			return RedirectToAction(nameof(Index));
-		}
-
-	}
+    }
 }

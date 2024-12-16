@@ -1,24 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WoodcarvingApp.Data.Models;
-using WoodcarvingApp.Services.Mapping;
-using WoodcarvingApp.Web.Data;
+using WoodcarvingApp.Services.Data.Interfaces;
 using WoodcarvingApp.Web.ViewModels.Woodcarving;
 
 namespace WoodcarvingApp.Web.Controllers
 {
-    public class WoodcarvingController(WoodcarvingDbContext dbContext) : BaseController
+    public class WoodcarvingController(IWoodcarvingService woodcarvingService) : BaseController
     {
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Woodcarving> allWoodcarving = await dbContext
-                .Woodcarvings
-                .Where(w => !w.IsDeleted)
-                .ToListAsync();
-
-            return View(allWoodcarving);
+            IEnumerable<WoodcarvingIndexViewModel> woodcarvings = await woodcarvingService.GetAllIndexAsync();
+            return View(woodcarvings);
         }
 
         [HttpGet]
@@ -26,26 +19,7 @@ namespace WoodcarvingApp.Web.Controllers
         public async Task<IActionResult> Create()
         {
 
-            var woodcarvers = await dbContext.Woodcarvers
-                .Select(w => new WoodcarverViewModel
-                {
-                    Id = w.Id,
-                    FullName = $"{w.FirstName} {w.LastName}"
-                })
-                .ToListAsync();
-            var woodTypes = await dbContext.WoodTypes
-                .Select(w => new WoodTypeViewModel
-                {
-                    Id = w.Id,
-                    WoodTypeName = w.WoodTypeName
-                })
-                .ToListAsync();
-
-            var model = new WoodcarvingCreateViewModel
-            {
-                Woodcarvers = woodcarvers,
-                WoodTypes = woodTypes
-            };
+            WoodcarvingCreateViewModel model = await woodcarvingService.GetWoodcarvingForCreateAsync();
 
             return View(model);
         }
@@ -56,31 +30,20 @@ namespace WoodcarvingApp.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                inputModel.Woodcarvers = await dbContext.Woodcarvers
-                    .Select(w => new WoodcarverViewModel
-                    {
-                        Id = w.Id,
-                        FullName = $"{w.FirstName} {w.LastName}"
-                    })
-                    .ToListAsync();
-                inputModel.WoodTypes = await dbContext.WoodTypes
-                    .Select(w => new WoodTypeViewModel
-                    {
-                        Id = w.Id,
-                        WoodTypeName = w.WoodTypeName
-                    })
-                    .ToListAsync();
+                var model = await woodcarvingService.GetWoodcarvingForCreateAsync();
+                inputModel.Woodcarvers = model?.Woodcarvers;
+                inputModel.WoodTypes = model?.WoodTypes;
 
                 return View(inputModel);
             }
 
-            if (string.IsNullOrWhiteSpace(inputModel.ImageUrl))
-                inputModel.ImageUrl = "/images/woodcarving-image-not-added.png";
+            bool isCreated = await woodcarvingService.CreateWoodcarvingAsync(inputModel);
 
-            var woodcarving = new Woodcarving();
-            AutoMapperConfig.MapperInstance.Map(inputModel, woodcarving);
-            await dbContext.AddAsync(woodcarving);
-            await dbContext.SaveChangesAsync();
+            if (!isCreated)
+            {
+                ModelState.AddModelError("", "An error occurred while creating the woodcarving.");
+                return View(inputModel);
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -88,39 +51,12 @@ namespace WoodcarvingApp.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-            var woodcarving = await dbContext.Woodcarvings
-                .Include(w => w.Woodcarver)
-                .Include(w => w.WoodType)
-                .Include(w => w.WoodcarvingExhibitions)
-                    .ThenInclude(we => we.Exhibition)
-                .Where(w => !w.IsDeleted && w.Id == id)
-                .FirstOrDefaultAsync();
+            var model = await woodcarvingService.GetWoodcarvingDetailsByIdAsync(id);
 
-            if (woodcarving == null)
+            if (model == null)
             {
                 return NotFound();
             }
-
-            var model = new WoodcarvingDetailsViewModel
-            {
-                Id = woodcarving.Id,
-                Title = woodcarving.Title,
-                Description = woodcarving.Description,
-                WoodcarverName = $"{woodcarving.Woodcarver.FirstName} {woodcarving.Woodcarver.LastName}",
-                WoodTypeName = woodcarving.WoodType.WoodTypeName,
-                ImageUrl = woodcarving.ImageUrl,
-                IsAvailable = woodcarving.IsAvailable,
-                Exhibitions = woodcarving.WoodcarvingExhibitions
-                    .Where(w => !w.Exhibition.IsDeleted)
-                    .Select(we => new ExhibitionViewModel
-                    {
-                        Id = we.Exhibition.Id,
-                        ExhibitionName = we.Exhibition.ExhibitionName,
-                        StartDate = we.Exhibition.StartDate,
-                        EndDate = we.Exhibition.EndDate
-                    })
-                    .ToList()
-            };
 
             return View(model);
         }
@@ -128,37 +64,12 @@ namespace WoodcarvingApp.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(Guid id)
         {
+            var model = await woodcarvingService.GetWoodcarvingForEditByIdAsync(id);
 
-            var woodcarvers = await dbContext.Woodcarvers
-                .Select(w => new WoodcarverViewModel
-                {
-                    Id = w.Id,
-                    FullName = w.FirstName + w.LastName
-                })
-                .ToListAsync();
-            var woodTypes = await dbContext.WoodTypes
-                .Select(w => new WoodTypeViewModel
-                {
-                    Id = w.Id,
-                    WoodTypeName = w.WoodTypeName
-                })
-                .ToListAsync();
-
-            var model = await dbContext.Woodcarvings
-                .Where(w => w.Id == id)
-                .Select(w => new WoodcarvingEditViewModel
-                {
-                    Id = w.Id,
-                    Title = w.Title,
-                    Description = w.Description,
-                    WoodcarverId = w.WoodcarverId,
-                    Woodcarvers = woodcarvers,
-                    WoodTypeId = w.WoodTypeId,
-                    WoodTypes = woodTypes,
-                    ImageUrl = w.ImageUrl,
-                    IsAvailable = w.IsAvailable
-                })
-                .FirstOrDefaultAsync();
+            if (model == null)
+            {
+                return NotFound();
+            }
 
             return View(model);
         }
@@ -169,43 +80,16 @@ namespace WoodcarvingApp.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                inputModel.Woodcarvers = await dbContext.Woodcarvers
-                    .Select(w => new WoodcarverViewModel
-                    {
-                        Id = w.Id,
-                        FullName = $"{w.FirstName} {w.LastName}"
-                    })
-                    .ToListAsync();
-                inputModel.WoodTypes = await dbContext.WoodTypes
-                    .Select(w => new WoodTypeViewModel
-                    {
-                        Id = w.Id,
-                        WoodTypeName = w.WoodTypeName
-                    })
-                    .ToListAsync();
-
+                await woodcarvingService.EditWoodcarvingAsync(inputModel);
                 return View(inputModel);
             }
 
-            if (string.IsNullOrWhiteSpace(inputModel.ImageUrl))
-                inputModel.ImageUrl = "/images/woodcarving-image-not-added.png";
+            var success = await woodcarvingService.EditWoodcarvingAsync(inputModel);
 
-            var woodcarving = await dbContext.Woodcarvings
-                .FirstOrDefaultAsync(w => w.Id == inputModel.Id && !w.IsDeleted);
-
-            if (woodcarving == null)
+            if (!success)
             {
                 return NotFound();
             }
-
-            woodcarving.Title = inputModel.Title;
-            woodcarving.Description = inputModel.Description;
-            woodcarving.WoodcarverId = inputModel.WoodcarverId ?? throw new InvalidOperationException("WoodcarverId is required.");
-            woodcarving.WoodTypeId = inputModel.WoodTypeId ?? throw new InvalidOperationException("WoodTypeId is required.");
-            woodcarving.ImageUrl = inputModel.ImageUrl;
-            woodcarving.IsAvailable = inputModel.IsAvailable;
-
-            await dbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
@@ -213,27 +97,12 @@ namespace WoodcarvingApp.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var woodcarving = await dbContext.Woodcarvings
-                .Where(w => !w.IsDeleted && w.Id == id)
-                .Select(w => new
-                {
-                    w.Id,
-                    w.Title,
-                    w.ImageUrl
-                })
-                .FirstOrDefaultAsync();
+            var model = await woodcarvingService.GetWoodcarvingForDeleteByIdAsync(id);
 
-            if (woodcarving == null)
+            if (model == null)
             {
                 return NotFound();
             }
-
-            var model = new WoodcarvingDeleteViewModel
-            {
-                Id = woodcarving.Id,
-                Title = woodcarving.Title,
-                ImageUrl = woodcarving.ImageUrl
-            };
 
             return View(model);
         }
@@ -242,19 +111,12 @@ namespace WoodcarvingApp.Web.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var woodcarving = await dbContext.Woodcarvings
-                .Where(w => !w.IsDeleted && w.Id == id)
-                .FirstOrDefaultAsync();
+            var success = await woodcarvingService.SoftDeleteWoodcarvingAsync(id);
 
-            if (woodcarving == null)
+            if (!success)
             {
                 return NotFound();
             }
-
-            woodcarving.IsDeleted = true;
-
-            dbContext.Woodcarvings.Update(woodcarving);
-            await dbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }

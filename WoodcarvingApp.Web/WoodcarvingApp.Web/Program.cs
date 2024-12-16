@@ -1,8 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WoodcarvingApp.Data.Models;
+using WoodcarvingApp.Data.Repository;
+using WoodcarvingApp.Data.Repository.Interfaces;
+using WoodcarvingApp.Services.Data;
+using WoodcarvingApp.Services.Data.Interfaces;
 using WoodcarvingApp.Services.Mapping;
 using WoodcarvingApp.Web.Data;
+using WoodcarvingApp.Web.Infrastructure.Extensions;
 using WoodcarvingApp.Web.Models;
 
 namespace WoodcarvingApp.Web
@@ -13,7 +18,9 @@ namespace WoodcarvingApp.Web
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             string connectionString = builder.Configuration.GetConnectionString("SQLServer")!;
-
+            string adminEmail = builder.Configuration.GetValue<string>("Administrator:Email")!;
+            string adminUsername = builder.Configuration.GetValue<string>("Administrator:Username")!;
+            string adminPassword = builder.Configuration.GetValue<string>("Administrator:Password")!;
             // Add services to the container.
             builder.Services.AddDbContext<WoodcarvingDbContext>(options =>
             {
@@ -37,9 +44,22 @@ namespace WoodcarvingApp.Web
                 cfg.LoginPath = "/Identity/Account/Login";
             });
 
-            //builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
+            // builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
+            //builder.Services.RegisterUserDefinedServices(typeof(IWoodcarvingService).Assembly);
 
-            //builder.Services.AddScoped<IWoodcarvingService, IWoodcarvingService>();
+            builder.Services.AddScoped<IWoodcarvingRepository, WoodcarvingRepository>();
+            builder.Services.AddScoped<IWoodcarverRepository, WoodcarverRepository>();
+            builder.Services.AddScoped<IRepository<WoodType, Guid>, BaseRepository<WoodType, Guid>>();
+            builder.Services.AddScoped<IRepository<City, Guid>, BaseRepository<City, Guid>>();
+            builder.Services.AddScoped<IExhibitionRepository, ExhibitionRepository>();
+
+            // Register your services
+            builder.Services.AddScoped<IWoodcarvingService, WoodcarvingService>();
+            builder.Services.AddScoped<IWoodcarverService, WoodcarverService>();
+            builder.Services.AddScoped<IWoodTypeService, WoodTypeService>();
+            builder.Services.AddScoped<ICityService, CityService>();
+            builder.Services.AddScoped<IExhibitionService, ExhibitionService>();
+
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages(); //
@@ -63,6 +83,8 @@ namespace WoodcarvingApp.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.SeedAdministrator(adminEmail, adminUsername, adminPassword);
 
             app.MapControllerRoute(
                 name: "default",

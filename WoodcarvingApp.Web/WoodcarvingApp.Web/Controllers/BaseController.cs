@@ -2,11 +2,11 @@
 
 namespace WoodcarvingApp.Web.Controllers
 {
-    public class BaseController : Controller
+    public class BaseController() : Controller
     {
         protected bool IsGuidIdValid(string? id, ref Guid parsedGuid)
-        {
-            if (String.IsNullOrWhiteSpace(id)) //Non-existing parameter in the URL
+        { //Non-existing parameter in the URL
+            if (String.IsNullOrWhiteSpace(id))
             {
                 return false;
             }
