@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace WoodcarvingApp.Web.ViewModels.Exhibition
+﻿namespace WoodcarvingApp.Web.ViewModels.Exhibition
 {
     public class ExhibitionCreateEditViewModel
     {
@@ -15,13 +13,9 @@ namespace WoodcarvingApp.Web.ViewModels.Exhibition
         public DateTime EndDate { get; set; }
 
         public Guid CityId { get; set; }
-
+        public virtual IEnumerable<CityViewModel>? Cities { get; set; }
         public string? ImageUrl { get; set; }
 
-        public IEnumerable<Guid>? SelectedWoodcarvings { get; set; }
-
-        public SelectList? Cities { get; set; }
-
-        public SelectList? Woodcarvings { get; set; }
+        public List<WoodcarvingCheckboxViewModel> Woodcarvings { get; set; }
     }
 }

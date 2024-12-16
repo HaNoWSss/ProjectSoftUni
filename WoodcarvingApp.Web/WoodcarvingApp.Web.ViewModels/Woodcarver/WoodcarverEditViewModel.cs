@@ -1,29 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using static WoodcarvingApp.Common.ApplicationConstants;
+
 namespace WoodcarvingApp.Web.ViewModels.Woodcarver
 {
-    public class WoodcarverEditViewModel
-    {
-        public Guid Id { get; set; }
+	public class WoodcarverEditViewModel
+	{
+		public Guid Id { get; set; }
 
-        [Required]
-        public string FirstName { get; set; } = null!;
+		[Required(ErrorMessage = "Please enter the first name of the woodcarver")]
+		[StringLength(NameMaxLength, ErrorMessage = "One letter, really?", MinimumLength = NameMinLength)]
+		public string FirstName { get; set; } = null!;
 
-        [Required]
-        public string LastName { get; set; } = null!;
+		[Required(ErrorMessage = "Please enter the last name of the woodcarver")]
+		[StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = "One letter, really?")]
+		public string LastName { get; set; } = null!;
 
-        [Range(1, 120)]
-        public int Age { get; set; }
+		[Required(ErrorMessage = "Please select a city")]
+		public Guid? CityId { get; set; }
 
-        [Phone]
-        public string PhoneNumber { get; set; } = null!;
+		public virtual IEnumerable<CityViewModel>? Cities { get; set; }
 
-        [Required]
-        public Guid CityId { get; set; }
+		[Required(ErrorMessage = "Please enter an age")]
+		[Range(1, 120, ErrorMessage = "Come on man, we all know that's not the right age")]
+		public int? Age { get; set; }
 
-        public string? ImageUrl { get; set; }
-        public SelectList CityList { get; set; } = null!;
+		[Required(ErrorMessage = "Please enter the phone number of the woodcarver")]
+		[RegularExpression(PhoneNumberRegex, ErrorMessage = "Phone Number must start with a valid country code and be not more than 12 digits. Example correct format(Without the spaces): '+359 88 275 2840'")]
+		public string? PhoneNumber { get; set; }
 
-    }
+		[StringLength(UrlMaxLength, ErrorMessage = "Image URL cannot exceed 255 characters")]
+		public string? ImageUrl { get; set; }
+
+	}
 
 }

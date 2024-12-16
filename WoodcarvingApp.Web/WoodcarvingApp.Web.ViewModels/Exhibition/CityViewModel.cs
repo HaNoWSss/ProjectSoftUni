@@ -1,4 +1,4 @@
-﻿namespace WoodcarvingApp.Web.ViewModels.Exhibition
+﻿namespace WoodcarvingApp.Web.ViewModels.Woodcarver
 {
     public class CityViewModel
     {
