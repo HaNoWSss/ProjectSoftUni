@@ -1,4 +1,5 @@
 ﻿@model WoodcarvingApp.Web.ViewModels.Woodcarver.WoodcarverCreateViewModel
+@using static WoodcarvingApp.Common.ApplicationConstants
 
 @{
     ViewData["Title"] = "Add Woodcarver";
@@ -7,37 +8,39 @@
 <div class="container mt-4">
     <h1 class="text-center">Add New Woodcarver</h1>
 
-    <form asp-action="Create" asp-controller="Woodcarver" method="post" enctype="multipart/form-data" class="mt-4">
+    <form asp-action="Create" asp-controller="Woodcarver" method="post" enctype="multipart/form-data" class="mt-4 needs-validation" novalidate>
         <div class="mb-3">
             <label for="FirstName" class="form-label">First Name</label>
-            <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+            <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" required minlength="@NameMinLength" maxlength="@NameMaxLength" title="First Name is required and must be between @NameMinLength and @NameMaxLength characters." />
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label for="LastName" class="form-label">Last Name</label>
-            <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+            <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" required minlength="@NameMinLength" maxlength="@NameMaxLength" title="Last Name is required and must be between @NameMinLength and @NameMaxLength characters." />
             <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label for="Age" class="form-label">Age</label>
-            <input asp-for="Age" class="form-control" value="" placeholder="Enter Age" />
+            <input asp-for="Age" class="form-control" value="" placeholder="Enter Age" required min="1" max="120" type="number" title="Please enter a valid age between 1 and 120." />
             <span asp-validation-for="Age" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label for="PhoneNumber" class="form-label">Phone Number</label>
-            <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" />
+            <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" required pattern="^[0-9]{3}.?[0-9]{3}.?[0-9]{4}" title="Please enter a valid phone number in the format: +123-456-7890." />
             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
         </div>
         <div class="mb-3">
-            <label asp-for="CityId" class="form-label">Select City</label>
-            <select asp-for="CityId" class="form-control" asp-items="@Model.CityList">
+            <label asp-for="@Model.CityId" class="form-label-add-edit">Select City</label>
+            <select asp-for="@Model.CityId" class="form-control" aria-required="true" asp-items="@(new SelectList(Model.Cities, "Id", "CityName"))" required title="Please select a city from the list.">
+                <option value="">Select City...</option>
             </select>
-            <span asp-validation-for="CityId" class="text-danger"></span>
+            <span asp-validation-for="@Model.CityId" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label for="ImageUrl" class="form-label">Photo URL</label>
-            <input asp-for="ImageUrl" class="form-control" placeholder="Enter photo URL" />
+            <input asp-for="ImageUrl" class="form-control" placeholder="Enter photo URL" maxlength="@UrlMaxLength" title="Photo URL cannot be longer than @UrlMaxLength characters." />
             <span asp-validation-for="ImageUrl" class="text-danger"></span>
         </div>
 
@@ -47,3 +50,61 @@
         </div>
     </form>
 </div>
+
+<script>
+    (function () {
+        'use strict'
+
+        var forms = document.querySelectorAll('.needs-validation');
+
+        // Function to validate individual input fields
+        function validateField(input) {
+            var errorMessage = input.title || input.validationMessage; // Use title attribute if present
+            var errorElement = input.nextElementSibling; // Assuming .invalid-feedback is the next sibling
+
+            if (!input.checkValidity()) {
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
+                if (errorElement && errorElement.classList.contains('invalid-feedback')) {
+                    errorElement.innerText = errorMessage;
+                } else {
+                    // Create a new element if not found
+                    errorElement = document.createElement('div');
+                    errorElement.classList.add('invalid-feedback', 'd-block');
+                    errorElement.innerText = errorMessage;
+                    input.parentNode.insertBefore(errorElement, input.nextSibling);
+                }
+            } else {
+                input.classList.add('is-valid');
+                input.classList.remove('is-invalid');
+                if (errorElement && errorElement.classList.contains('invalid-feedback')) {
+                    errorElement.innerText = '';
+                }
+            }
+        }
+
+        // Add event listeners to all forms with the needs-validation class
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+
+            // Add blur event listener to each form control
+            form.querySelectorAll('input, select, textarea').forEach(function (input) {
+                input.addEventListener('blur', function () {
+                    validateField(input);
+                });
+            });
+        });
+    })();
+</script>
+
+
+
+
+
+
