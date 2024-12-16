@@ -1,164 +1,264 @@
-﻿//using Microsoft.AspNetCore.Mvc.Rendering;
-//using Microsoft.EntityFrameworkCore;
-//using WoodcarvingApp.Data.Models;
-//using WoodcarvingApp.Data.Repository.Interfaces;
-//using WoodcarvingApp.Services.Data.Interfaces;
-//using WoodcarvingApp.Services.Mapping;
-//using WoodcarvingApp.Web.ViewModels.Woodcarving;
+﻿using Microsoft.EntityFrameworkCore;
+using WoodcarvingApp.Data.Models;
+using WoodcarvingApp.Data.Repository.Interfaces;
+using WoodcarvingApp.Services.Data.Interfaces;
+using WoodcarvingApp.Web.ViewModels.Woodcarving;
 
-//namespace WoodcarvingApp.Services.Data
-//{
-//    public class WoodcarvingService(IWoodcarvingRepository woodcarvingRepository) : BaseService, IWoodcarvingService
-//    {
-//        public async Task AddWoodcarvingAsync(WoodcarvingCreateViewModel model)
-//        {
-//            if (model == null)
-//            {
-//                throw new ArgumentNullException(nameof(model), "Model cannot be null");
-//            }
+namespace WoodcarvingApp.Services.Data
+{
+    public class WoodcarvingService : BaseService, IWoodcarvingService
+    {
+        private readonly IWoodcarvingRepository woodcarvingRepository;
 
-//            var woodcarving = new Woodcarving();
-//            AutoMapperConfig.MapperInstance.Map(model, woodcarving);
+        public WoodcarvingService(IWoodcarvingRepository woodcarvingRepository)
+        {
+            this.woodcarvingRepository = woodcarvingRepository;
+        }
+        public async Task<WoodcarvingCreateViewModel?> GetWoodcarvingForCreateAsync()
+        {
+            IEnumerable<Woodcarver> woodcarvers = await woodcarvingRepository.GetWoodcarverListAsync();
+            IEnumerable<WoodType> woodTypes = await woodcarvingRepository.GetWoodTypeListAsync();
 
-//            await woodcarvingRepository.AddAsync(woodcarving);
-//        }
-//        public async Task<(bool isValid, SelectList woodcarvers, SelectList woodTypes)> PrepareCreateViewModelAsync(WoodcarvingCreateViewModel inputModel)
-//        {
-//            var woodcarverList = await woodcarvingRepository.GetWoodcarverListAsync();
-//            var woodTypeList = await woodcarvingRepository.GetWoodTypeListAsync();
+            return new WoodcarvingCreateViewModel
+            {
+                Woodcarvers = woodcarvers.Select(wc => new WoodcarverViewModel()
+                {
+                    Id = wc.Id,
+                    FullName = $"{wc.FirstName} {wc.LastName}"
+                }),
+                WoodTypes = woodTypes.Select(wt => new WoodTypeViewModel()
+                {
+                    Id = wt.Id,
+                    WoodTypeName = wt.WoodTypeName
+                })
+            };
+        }
 
-//            //inputModel.WoodcarverList = woodcarverList;
-//            //inputModel.WoodTypeList = woodTypeList;
+        public async Task<bool> CreateWoodcarvingAsync(WoodcarvingCreateViewModel inputModel)
+        {
+            if (inputModel == null) return false;
 
-//            if (!await woodcarvingRepository.WoodcarverExistsAsync(inputModel.WoodcarverId))
-//            {
-//                return (false, woodcarverList, woodTypeList);
-//            }
+            var woodcarvers = await woodcarvingRepository.GetWoodcarverListAsync();
+            inputModel.Woodcarvers = woodcarvers.Select(w => new WoodcarverViewModel
+            {
+                Id = w.Id,
+                FullName = $"{w.FirstName} {w.LastName}"
+            });
 
-//            if (!await woodcarvingRepository.WoodTypeExistsAsync(inputModel.WoodTypeId))
-//            {
-//                return (false, woodcarverList, woodTypeList);
-//            }
+            var woodTypes = await woodcarvingRepository.GetWoodTypeListAsync();
+            inputModel.WoodTypes = woodTypes.Select(wt => new WoodTypeViewModel
+            {
+                Id = wt.Id,
+                WoodTypeName = wt.WoodTypeName
+            });
 
-//            if (inputModel == null)
-//            {
-//                throw new ArgumentNullException(nameof(inputModel), "Model cannot be null");
-//            }
+            if (string.IsNullOrWhiteSpace(inputModel.ImageUrl))
+            {
+                inputModel.ImageUrl = "/images/woodcarving-image-not-added.png";
+            }
 
-//            var woodcarving = new Woodcarving();
-//            AutoMapperConfig.MapperInstance.Map(inputModel, woodcarving);
+            var woodcarving = new Woodcarving
+            {
+                Id = inputModel.Id,
+                Title = inputModel.Title,
+                Description = inputModel.Description,
+                WoodcarverId = inputModel.WoodcarverId ?? throw new InvalidOperationException("WoodcarverId is required."),
+                WoodTypeId = inputModel.WoodTypeId ?? throw new InvalidOperationException("WoodTypeId is required."),
+                ImageUrl = inputModel.ImageUrl,
+                IsAvailable = inputModel.IsAvailable
+            };
 
-//            await woodcarvingRepository.AddAsync(woodcarving);
+            await woodcarvingRepository.AddAsync(woodcarving);
+            await woodcarvingRepository.SaveChangesAsync();
 
-//            return (true, woodcarverList, woodTypeList);
-//        }
+            return true;
+        }
 
-//        public async Task<bool> EditWoodcarvingAsync(WoodcarvingEditViewModel model)
-//        {
-//            throw new NotImplementedException();
+        public async Task<bool> EditWoodcarvingAsync(WoodcarvingEditViewModel inputModel)
+        {
+            if (inputModel == null) return false;
 
-//        }
+            var woodcarvers = await woodcarvingRepository.GetWoodcarverListAsync();
+            inputModel.Woodcarvers = woodcarvers.Select(w => new WoodcarverViewModel
+            {
+                Id = w.Id,
+                FullName = $"{w.FirstName} {w.LastName}"
+            });
 
-//        public async Task<WoodcarvingDetailsViewModel?> GetWoodcarvingDetailsByIdAsync(Guid id)
-//        {
-//            var woodcarving = await woodcarvingRepository
-//                .GetAllAttached()
-//                .Include(w => w.Woodcarver)
-//                .Include(w => w.WoodType)
-//                .Include(w => w.WoodcarvingExhibitions)
-//                    .ThenInclude(we => we.Exhibition)
-//                .Where(w => w.Id == id && !w.IsDeleted)
-//                .FirstOrDefaultAsync();
+            var woodTypes = await woodcarvingRepository.GetWoodTypeListAsync();
+            inputModel.WoodTypes = woodTypes.Select(wt => new WoodTypeViewModel
+            {
+                Id = wt.Id,
+                WoodTypeName = wt.WoodTypeName
+            });
 
-//            if (woodcarving == null)
-//            {
-//                return null;
-//            }
+            if (string.IsNullOrWhiteSpace(inputModel.ImageUrl))
+            {
+                inputModel.ImageUrl = "/images/woodcarving-image-not-added.png";
+            }
 
-//            return new WoodcarvingDetailsViewModel
-//            {
-//                Id = woodcarving.Id,
-//                Title = woodcarving.Title,
-//                Description = woodcarving.Description,
-//                WoodcarverName = $"{woodcarving.Woodcarver.FirstName} {woodcarving.Woodcarver.LastName}",
-//                WoodTypeName = woodcarving.WoodType.WoodTypeName,
-//                ImageUrl = woodcarving.ImageUrl,
-//                IsAvailable = woodcarving.IsAvailable,
-//                Exhibitions = woodcarving.WoodcarvingExhibitions
-//                    .Where(we => !we.Exhibition.IsDeleted)
-//                    .Select(we => new ExhibitionViewModel
-//                    {
-//                        Id = we.Exhibition.Id,
-//                        ExhibitionName = we.Exhibition.ExhibitionName,
-//                        StartDate = we.Exhibition.StartDate,
-//                        EndDate = we.Exhibition.EndDate
-//                    })
-//                    .ToList()
-//            };
-//        }
+            var woodcarving = await woodcarvingRepository
+                .GetAllAttached()
+                .FirstOrDefaultAsync(w => w.Id == inputModel.Id && !w.IsDeleted);
 
-//        public async Task<WoodcarvingEditViewModel?> GetWoodcarvingForEditByIdAsync(Guid id)
-//        {
-//            throw new NotImplementedException();
+            if (woodcarving == null)
+            {
+                return false;
+            }
 
-//        }
+            woodcarving.Title = inputModel.Title;
+            woodcarving.Description = inputModel.Description;
+            woodcarving.WoodcarverId = inputModel.WoodcarverId ?? throw new InvalidOperationException("WoodcarverId is required.");
+            woodcarving.WoodTypeId = inputModel.WoodTypeId ?? throw new InvalidOperationException("WoodTypeId is required.");
+            woodcarving.ImageUrl = inputModel.ImageUrl;
+            woodcarving.IsAvailable = inputModel.IsAvailable;
 
-//        public async Task<WoodcarvingDeleteViewModel?> GetWoodcarvingForDeleteByIdAsync(Guid id)
-//        {
-//            var woodcarving = await woodcarvingRepository
-//                .GetAllAttached()
-//                .Where(w => w.Id == id && !w.IsDeleted)
-//                .FirstOrDefaultAsync();
+            await woodcarvingRepository.SaveChangesAsync();
 
-//            if (woodcarving == null)
-//            {
-//                return null;
-//            }
+            return true;
+        }
 
-//            return new WoodcarvingDeleteViewModel
-//            {
-//                Id = woodcarving.Id,
-//                Title = woodcarving.Title,
-//                ImageUrl = woodcarving.ImageUrl
-//            };
-//        }
+        public async Task<IEnumerable<WoodcarvingIndexViewModel>> GetAllIndexAsync()
+        {
+            return await woodcarvingRepository
+                .GetAllAttached()
+                .Where(w => !w.IsDeleted)
+                .Select(w => new WoodcarvingIndexViewModel
+                {
+                    Id = w.Id,
+                    Title = w.Title,
+                    Description = w.Description,
+                    ImageUrl = w.ImageUrl
+                })
+                .ToListAsync();
+        }
 
-//        public async Task<bool> SoftDeleteCinemaAsync(Guid id)
-//        {
-//            var woodcarving = await woodcarvingRepository.GetByIdAsync(id);
+        public async Task<WoodcarvingDetailsViewModel?> GetWoodcarvingDetailsByIdAsync(Guid id)
+        {
+            var woodcarving = await woodcarvingRepository
+                .GetAllAttached()
+                .Include(w => w.Woodcarver)
+                .Include(w => w.WoodType)
+                .Include(w => w.WoodcarvingExhibitions)
+                    .ThenInclude(we => we.Exhibition)
+                .Where(w => !w.IsDeleted && w.Id == id)
+                .FirstOrDefaultAsync();
 
-//            if (woodcarving == null || woodcarving.IsDeleted)
-//            {
-//                return false;
-//            }
+            if (woodcarving == null)
+            {
+                return null;
+            }
 
-//            woodcarving.IsDeleted = true;
+            var model = new WoodcarvingDetailsViewModel
+            {
+                Id = woodcarving.Id,
+                Title = woodcarving.Title,
+                Description = woodcarving.Description,
+                WoodcarverName = $"{woodcarving.Woodcarver.FirstName} {woodcarving.Woodcarver.LastName}",
+                WoodTypeName = woodcarving.WoodType.WoodTypeName,
+                ImageUrl = woodcarving.ImageUrl,
+                IsAvailable = woodcarving.IsAvailable,
+                Exhibitions = woodcarving.WoodcarvingExhibitions
+                    .Where(we => !we.Exhibition.IsDeleted)
+                    .Select(we => new ExhibitionViewModel
+                    {
+                        Id = we.Exhibition.Id,
+                        ExhibitionName = we.Exhibition.ExhibitionName,
+                        StartDate = we.Exhibition.StartDate,
+                        EndDate = we.Exhibition.EndDate
+                    })
+                    .ToList()
+            };
 
-//            woodcarvingRepository.Update(woodcarving);
-//            await woodcarvingRepository.SaveChangesAsync();
-//            return true;
-//        }
+            return model;
+        }
 
-//        public async Task<IEnumerable<Woodcarving>> GetAllIndexAsync()
-//        {
-//            IEnumerable<Woodcarving> allWoodcarvings = await woodcarvingRepository
-//                .GetAllAttached()
-//                .Where(w => !w.IsDeleted)
-//                .ToListAsync();
+        public async Task<WoodcarvingDeleteViewModel?> GetWoodcarvingForDeleteByIdAsync(Guid id)
+        {
+            var woodcarving = await woodcarvingRepository
+                .GetAllAttached()
+                .Where(w => !w.IsDeleted && w.Id == id)
+                .Select(w => new
+                {
+                    w.Id,
+                    w.Title,
+                    w.ImageUrl
+                })
+                .FirstOrDefaultAsync();
 
-//            return allWoodcarvings;
-//        }
+            if (woodcarving == null)
+            {
+                return null;
+            }
 
-//        public async Task<(IEnumerable<SelectListItem> woodcarvers, IEnumerable<SelectListItem> woodTypes)> GetDropdownListsAsync()
-//        {
+            return new WoodcarvingDeleteViewModel
+            {
+                Id = woodcarving.Id,
+                Title = woodcarving.Title,
+                ImageUrl = woodcarving.ImageUrl
+            };
+        }
 
-//            throw new NotImplementedException();
-//        }
+        public async Task<WoodcarvingEditViewModel?> GetWoodcarvingForEditByIdAsync(Guid id)
+        {
+            var woodcarvers = await woodcarvingRepository.GetWoodcarverListAsync();
+            var woodcarverViewModels = woodcarvers.Select(w => new WoodcarverViewModel
+            {
+                Id = w.Id,
+                FullName = $"{w.FirstName} {w.LastName}"
+            }).ToList();
 
-//        public Task<WoodcarvingEditViewModel?> GetWoodcarvingForCreateAsync()
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
+            var woodTypes = await woodcarvingRepository.GetWoodTypeListAsync();
+            var woodTypeViewModels = woodTypes.Select(wt => new WoodTypeViewModel
+            {
+                Id = wt.Id,
+                WoodTypeName = wt.WoodTypeName
+            }).ToList();
 
-//}
+            var woodcarving = await woodcarvingRepository
+                .GetAllAttached()
+                .Where(w => w.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (woodcarving == null)
+            {
+                return null;
+            }
+
+            var model = new WoodcarvingEditViewModel
+            {
+                Id = woodcarving.Id,
+                Title = woodcarving.Title,
+                Description = woodcarving.Description,
+                WoodcarverId = woodcarving.WoodcarverId,
+                Woodcarvers = woodcarverViewModels,
+                WoodTypeId = woodcarving.WoodTypeId,
+                WoodTypes = woodTypeViewModels,
+                ImageUrl = woodcarving.ImageUrl,
+                IsAvailable = woodcarving.IsAvailable
+            };
+
+            return model;
+        }
+
+        public async Task<bool> SoftDeleteWoodcarvingAsync(Guid id)
+        {
+            var woodcarving = await woodcarvingRepository
+                .GetAllAttached()
+                .FirstOrDefaultAsync(w => !w.IsDeleted && w.Id == id);
+
+            if (woodcarving == null)
+            {
+                return false;
+            }
+
+            woodcarving.IsDeleted = true;
+
+            woodcarvingRepository.Update(woodcarving);
+            await woodcarvingRepository.SaveChangesAsync();
+
+            return true;
+        }
+    }
+
+}
