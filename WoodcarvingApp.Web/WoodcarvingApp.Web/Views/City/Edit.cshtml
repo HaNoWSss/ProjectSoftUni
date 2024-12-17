@@ -1,4 +1,5 @@
 ﻿@model WoodcarvingApp.Web.ViewModels.City.CityEditViewModel
+@using static WoodcarvingApp.Common.ApplicationConstants
 
 @{
     ViewData["Title"] = "Edit City";
@@ -7,17 +8,17 @@
 <div class="container mt-4">
     <h1 class="text-center">Edit City</h1>
 
-    <form asp-action="Edit" method="post">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data" class="mt-4 needs-validation" novalidate>
         @Html.AntiForgeryToken()
         <div class="mb-3">
             <label asp-for="CityName" class="form-label">City Name</label>
-            <input asp-for="CityName" class="form-control" />
+            <input asp-for="CityName" class="form-control" placeholder="Enter City Name" required minlength="@NameMinLength" maxlength="@NameMaxLength" title="First Name is required and must be between @NameMinLength and @NameMaxLength characters." />
             <span asp-validation-for="CityName" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label asp-for="ImageUrl" class="form-label">Image URL</label>
-            <input asp-for="ImageUrl" class="form-control" />
+            <input asp-for="ImageUrl" class="form-control" placeholder="Enter photo URL" maxlength="@UrlMaxLength" title="Photo URL cannot be longer than @UrlMaxLength characters." />
             <span asp-validation-for="ImageUrl" class="text-danger"></span>
         </div>
 
@@ -31,3 +32,56 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+
+<script>
+    (function () {
+        'use strict'
+
+        var forms = document.querySelectorAll('.needs-validation');
+
+        // Function to validate individual input fields
+        function validateField(input) {
+            var errorMessage = input.title || input.validationMessage; // Use title attribute if present
+            var errorElement = input.nextElementSibling; // Assuming .invalid-feedback is the next sibling
+
+            if (!input.checkValidity()) {
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
+                if (errorElement && errorElement.classList.contains('invalid-feedback')) {
+                    errorElement.innerText = errorMessage;
+                } else {
+                    // Create a new element if not found
+                    errorElement = document.createElement('div');
+                    errorElement.classList.add('invalid-feedback', 'd-block');
+                    errorElement.innerText = errorMessage;
+                    input.parentNode.insertBefore(errorElement, input.nextSibling);
+                }
+            } else {
+                input.classList.add('is-valid');
+                input.classList.remove('is-invalid');
+                if (errorElement && errorElement.classList.contains('invalid-feedback')) {
+                    errorElement.innerText = '';
+                }
+            }
+        }
+
+        // Add event listeners to all forms with the needs-validation class
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+
+            // Add blur event listener to each form control
+            form.querySelectorAll('input, select, textarea').forEach(function (input) {
+                input.addEventListener('blur', function () {
+                    validateField(input);
+                });
+            });
+        });
+    })();
+</script>

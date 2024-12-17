@@ -21,6 +21,8 @@ namespace WoodcarvingApp.Web
             string adminEmail = builder.Configuration.GetValue<string>("Administrator:Email")!;
             string adminUsername = builder.Configuration.GetValue<string>("Administrator:Username")!;
             string adminPassword = builder.Configuration.GetValue<string>("Administrator:Password")!;
+            //string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            //    builder.Configuration.GetValue<string>("Seed:MoviesJson")!);
             // Add services to the container.
             builder.Services.AddDbContext<WoodcarvingDbContext>(options =>
             {
@@ -59,6 +61,7 @@ namespace WoodcarvingApp.Web
             builder.Services.AddScoped<IWoodTypeService, WoodTypeService>();
             builder.Services.AddScoped<ICityService, CityService>();
             builder.Services.AddScoped<IExhibitionService, ExhibitionService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
 
             builder.Services.AddControllersWithViews();
@@ -84,8 +87,20 @@ namespace WoodcarvingApp.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.SeedAdministrator(adminEmail, adminUsername, adminPassword);
+            app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
 
+            if (app.Environment.IsDevelopment())
+            {
+                app.SeedAdministrator(adminEmail, adminUsername, adminPassword);
+                //app.SeedMovies(jsonPath);
+            }
+
+            app.MapControllerRoute(
+                name: "Areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+            app.MapControllerRoute(
+                name: "Errors",
+                pattern: "{controller=Home}/{action=Index}/{statusCode?}");
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

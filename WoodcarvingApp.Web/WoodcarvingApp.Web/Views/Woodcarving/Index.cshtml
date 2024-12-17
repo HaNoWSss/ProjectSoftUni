@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WoodcarvingApp.Web.ViewModels.Woodcarving.WoodcarvingIndexViewModel>
+﻿@model WoodcarvingApp.Web.ViewModels.Woodcarving.WoodcarvingSearchFilterIndexViewModel
 
 @{
 	ViewData["Title"] = "Woodcarvings";
@@ -6,6 +6,39 @@
 
 <div class="container mt-4">
 	<h1 class="text-center">Woodcarvings</h1>
+
+	<form method="get" asp-action="Index" class="mb-4">
+	<div class="row">
+		<div class="col">
+			<div class="form-group">
+				<label asp-for="SearchQuery">Search by keyword</label>
+				<input asp-for="SearchQuery" class="form-control" placeholder="Search by title..." />
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label asp-for="WoodcarverFilter">Filter by Woodcarver</label>
+				<select asp-for="WoodcarverFilter" class="form-control">
+					@if (Model.AllWoodcarvers != null)
+					{
+						<option value="">Filter by Woodcarver...</option>
+						foreach (string woodcarver in Model.AllWoodcarvers)
+						{
+							<option value="@woodcarver">@woodcarver</option>
+						}
+					}
+				</select>
+			</div>
+			</div>
+			<div class="col col d-flex align-items-end">
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Filter</button>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	</div>
 
 	@if (this.User?.Identity?.IsAuthenticated ?? false)
 	{
@@ -16,10 +49,10 @@
 		</div>
 	}
 
-	@if (Model != null && Model.Any())
+	@if (Model.Woodcarvings != null && Model.Woodcarvings.Any())
 	{
 		<div class="row row-cols-1 row-cols-md-3 g-4">
-			@foreach (var woodcarving in Model)
+			@foreach (var woodcarving in Model.Woodcarvings)
 			{
 				<div class="col">
 					<div class="card h-100">

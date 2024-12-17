@@ -5,121 +5,138 @@ using WoodcarvingApp.Web.ViewModels.Woodcarving;
 
 namespace WoodcarvingApp.Web.Controllers
 {
-    public class WoodcarvingController(IWoodcarvingService woodcarvingService) : BaseController
-    {
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            IEnumerable<WoodcarvingIndexViewModel> woodcarvings = await woodcarvingService.GetAllIndexAsync();
-            return View(woodcarvings);
-        }
+	public class WoodcarvingController(IWoodcarvingService woodcarvingService) : BaseController
+	{
+		[HttpGet]
+		public async Task<IActionResult> Index(WoodcarvingSearchFilterIndexViewModel inputModel)
+		{
+			// Fetch filtered woodcarvings
+			IEnumerable<WoodcarvingIndexViewModel> woodcarvings = await woodcarvingService.GetAllWoodcarvingsAsync(inputModel);
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Create()
-        {
+			// Count matching woodcarvings
+			int allWoodcarvingsCount = await woodcarvingService.GetWoodcarvingsCountByFilterAsync(inputModel);
 
-            WoodcarvingCreateViewModel model = await woodcarvingService.GetWoodcarvingForCreateAsync();
+			// Prepare the view model
+			WoodcarvingSearchFilterIndexViewModel viewModel = new WoodcarvingSearchFilterIndexViewModel
+			{
+				Woodcarvings = woodcarvings,
+				SearchQuery = inputModel.SearchQuery,
+				WoodcarverFilter = inputModel.WoodcarverFilter,
+				AllWoodcarvers = await woodcarvingService.GetAllWoodcarversAsync(),
+				CurrentPage = inputModel.CurrentPage ?? 1,
+				EntitiesPerPage = inputModel.EntitiesPerPage ?? 10,
+				TotalPages = (int)Math.Ceiling((double)allWoodcarvingsCount / (inputModel.EntitiesPerPage ?? 10))
+			};
 
-            return View(model);
-        }
+			return View(viewModel);
+		}
 
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Create(WoodcarvingCreateViewModel inputModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                var model = await woodcarvingService.GetWoodcarvingForCreateAsync();
-                inputModel.Woodcarvers = model?.Woodcarvers;
-                inputModel.WoodTypes = model?.WoodTypes;
+		[HttpGet]
+		[Authorize]
+		public async Task<IActionResult> Create()
+		{
 
-                return View(inputModel);
-            }
+			WoodcarvingCreateViewModel model = await woodcarvingService.GetWoodcarvingForCreateAsync();
 
-            bool isCreated = await woodcarvingService.CreateWoodcarvingAsync(inputModel);
+			return View(model);
+		}
 
-            if (!isCreated)
-            {
-                ModelState.AddModelError("", "An error occurred while creating the woodcarving.");
-                return View(inputModel);
-            }
+		[HttpPost]
+		[Authorize]
+		public async Task<IActionResult> Create(WoodcarvingCreateViewModel inputModel)
+		{
+			if (!ModelState.IsValid)
+			{
+				var model = await woodcarvingService.GetWoodcarvingForCreateAsync();
+				inputModel.Woodcarvers = model?.Woodcarvers;
+				inputModel.WoodTypes = model?.WoodTypes;
 
-            return RedirectToAction(nameof(Index));
-        }
+				return View(inputModel);
+			}
 
-        [HttpGet]
-        public async Task<IActionResult> Details(Guid id)
-        {
-            var model = await woodcarvingService.GetWoodcarvingDetailsByIdAsync(id);
+			bool isCreated = await woodcarvingService.CreateWoodcarvingAsync(inputModel);
 
-            if (model == null)
-            {
-                return NotFound();
-            }
+			if (!isCreated)
+			{
+				ModelState.AddModelError("", "An error occurred while creating the woodcarving.");
+				return View(inputModel);
+			}
 
-            return View(model);
-        }
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Edit(Guid id)
-        {
-            var model = await woodcarvingService.GetWoodcarvingForEditByIdAsync(id);
+			return RedirectToAction(nameof(Index));
+		}
 
-            if (model == null)
-            {
-                return NotFound();
-            }
+		[HttpGet]
+		public async Task<IActionResult> Details(Guid id)
+		{
+			var model = await woodcarvingService.GetWoodcarvingDetailsByIdAsync(id);
 
-            return View(model);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Edit(WoodcarvingEditViewModel inputModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                await woodcarvingService.EditWoodcarvingAsync(inputModel);
-                return View(inputModel);
-            }
+			if (model == null)
+			{
+				return NotFound();
+			}
 
-            var success = await woodcarvingService.EditWoodcarvingAsync(inputModel);
+			return View(model);
+		}
+		[HttpGet]
+		[Authorize]
+		public async Task<IActionResult> Edit(Guid id)
+		{
+			var model = await woodcarvingService.GetWoodcarvingForEditByIdAsync(id);
 
-            if (!success)
-            {
-                return NotFound();
-            }
+			if (model == null)
+			{
+				return NotFound();
+			}
 
-            return RedirectToAction(nameof(Index));
-        }
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var model = await woodcarvingService.GetWoodcarvingForDeleteByIdAsync(id);
+			return View(model);
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[Authorize]
+		public async Task<IActionResult> Edit(WoodcarvingEditViewModel inputModel)
+		{
+			if (!ModelState.IsValid)
+			{
+				await woodcarvingService.EditWoodcarvingAsync(inputModel);
+				return View(inputModel);
+			}
 
-            if (model == null)
-            {
-                return NotFound();
-            }
+			var success = await woodcarvingService.EditWoodcarvingAsync(inputModel);
 
-            return View(model);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            var success = await woodcarvingService.SoftDeleteWoodcarvingAsync(id);
+			if (!success)
+			{
+				return NotFound();
+			}
 
-            if (!success)
-            {
-                return NotFound();
-            }
+			return RedirectToAction(nameof(Index));
+		}
+		[HttpGet]
+		[Authorize]
+		public async Task<IActionResult> Delete(Guid id)
+		{
+			var model = await woodcarvingService.GetWoodcarvingForDeleteByIdAsync(id);
 
-            return RedirectToAction(nameof(Index));
-        }
+			if (model == null)
+			{
+				return NotFound();
+			}
 
-    }
+			return View(model);
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[Authorize]
+		public async Task<IActionResult> DeleteConfirmed(Guid id)
+		{
+			var success = await woodcarvingService.SoftDeleteWoodcarvingAsync(id);
+
+			if (!success)
+			{
+				return NotFound();
+			}
+
+			return RedirectToAction(nameof(Index));
+		}
+
+	}
 }

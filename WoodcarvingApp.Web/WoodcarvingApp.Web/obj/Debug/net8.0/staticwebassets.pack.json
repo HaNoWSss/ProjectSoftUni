@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\js\\validationScript.json",
+      "PackagePath": "staticwebassets\\js\\validationScript.json"
+    },
+    {
       "Id": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

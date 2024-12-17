@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XYAyd8NhnSY3NIsfo4HM2mxhdBZql/+sfrZZ5Wz0ktY=",
+  "Hash": "n6oL1owBG4g2taT60xB1ws2U1ptaS4Xea8nU1BQD4N0=",
   "Source": "WoodcarvingApp.Web",
   "BasePath": "_content/WoodcarvingApp.Web",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\js\\validationScript.json",
+      "SourceId": "WoodcarvingApp.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\",
+      "BasePath": "_content/WoodcarvingApp.Web",
+      "RelativePath": "js/validationScript.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\validationScript.json"
     },
     {
       "Identity": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
