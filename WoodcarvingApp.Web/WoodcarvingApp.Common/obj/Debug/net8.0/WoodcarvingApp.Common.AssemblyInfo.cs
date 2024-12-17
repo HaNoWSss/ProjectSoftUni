@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WoodcarvingApp.Common")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6c5f2d096d922e861252260f67f89c1a2a74058")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a53dbc46c2b6ffacdc9c1fb31e4016ad5ce8855c")]
 [assembly: System.Reflection.AssemblyProductAttribute("WoodcarvingApp.Common")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WoodcarvingApp.Common")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
