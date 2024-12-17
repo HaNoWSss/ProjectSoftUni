@@ -21,8 +21,6 @@ namespace WoodcarvingApp.Web
             string adminEmail = builder.Configuration.GetValue<string>("Administrator:Email")!;
             string adminUsername = builder.Configuration.GetValue<string>("Administrator:Username")!;
             string adminPassword = builder.Configuration.GetValue<string>("Administrator:Password")!;
-            //string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-            //    builder.Configuration.GetValue<string>("Seed:MoviesJson")!);
             // Add services to the container.
             builder.Services.AddDbContext<WoodcarvingDbContext>(options =>
             {
@@ -92,7 +90,6 @@ namespace WoodcarvingApp.Web
             if (app.Environment.IsDevelopment())
             {
                 app.SeedAdministrator(adminEmail, adminUsername, adminPassword);
-                //app.SeedMovies(jsonPath);
             }
 
             app.MapControllerRoute(
