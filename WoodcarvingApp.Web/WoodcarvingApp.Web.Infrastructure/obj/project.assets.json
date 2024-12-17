@@ -4894,6 +4894,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.10",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.10",
+          "Newtonsoft.Json": "13.0.3",
           "WoodcarvingApp.Common": "1.0.0",
           "WoodcarvingApp.Data.Models": "1.0.0"
         },
