@@ -1,0 +1,14 @@
+[
+  {
+    "Id": "b1f5aa4d-6f92-4b0f-8e37-90d3a2f7c0e1",
+    "CityName": "New York",
+    "ImageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.JdS0gRMOKp50OdrdPtnkpwHaE8%26pid%3DApi&f=1&ipt=97ed82df0cb89ed0dbae5d680652f0513fbbf2df7d9f8f348584dece9e4b9abd&ipo=images",
+    "IsDeleted": false
+  },
+  {
+    "Id": "2c3e6b18-9e11-4d2a-bf50-816e0c6d6d15",
+    "CityName": "Los Angeles",
+    "ImageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.cXZECwOwvxCLTwpnK2l3TAHaE7%26pid%3DApi&f=1&ipt=a7083c6c3178beed48a1bfe3c62a86360491e732eb671367ba82cefb91ee78e8&ipo=images",
+    "IsDeleted": false
+  }
+]

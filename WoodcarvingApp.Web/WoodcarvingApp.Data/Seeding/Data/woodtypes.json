@@ -1,0 +1,20 @@
+[
+  {
+    "Id": "5f8d8f45-1831-4ff9-9f3a-7bf6a3c8c2d9",
+    "WoodTypeName": "Oak",
+    "Description": "Strong and durable hardwood.",
+    "Hardness": "Hard",
+    "Color": "Brown",
+    "ImageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgophuongdong.com%2Fwp-content%2Fuploads%2F2021%2F01%2Fw_oaklogs.jpg&f=1&nofb=1&ipt=3322818eb410c99db758fb423c86185102e3a6298f83d8704d524c12c4bb3223&ipo=images",
+    "IsDeleted": false
+  },
+  {
+    "Id": "fae8f3b1-7f8a-4e3e-84f1-2a8b89c2e9e4",
+    "WoodTypeName": "Pine",
+    "Description": "Lightweight and versatile softwood.",
+    "Hardness": "Soft",
+    "Color": "Light Brown",
+    "ImageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fclinelumber.com%2Fwp-content%2Fuploads%2F2019%2F10%2Frough-white-pine-lumber-prod2.jpg&f=1&nofb=1&ipt=35ca14d5e9b96f58a273d6c241f40cf33044b24c3e7d076728b46be576dd9d3e&ipo=images",
+    "IsDeleted": false
+  }
+]

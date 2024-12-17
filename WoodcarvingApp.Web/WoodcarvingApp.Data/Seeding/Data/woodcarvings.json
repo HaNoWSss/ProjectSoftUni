@@ -1,0 +1,22 @@
+[
+  {
+    "Id": "a4c0d4f8-57eb-4c09-a1b4-7d8a4b3e2f0e",
+    "Title": "Eagle Statue",
+    "Description": "A detailed carving of an eagle.",
+    "WoodcarverId": "3ad91b4f-cb7c-4b01-9e2e-7c5b5a290f8a",
+    "WoodTypeId": "5f8d8f45-1831-4ff9-9f3a-7bf6a3c8c2d9",
+    "ImageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FWJUAAOSweTRdPhB9%2Fs-l1600.jpg&f=1&nofb=1&ipt=6e986caf468153971b8929fcc163ecb39b9107071eb0aa56a7322b4802b84703&ipo=images",
+    "IsAvailable": true,
+    "IsDeleted": false
+  },
+  {
+    "Id": "4f9e2b3c-7e1f-4b6e-9f8a-2e5b0d4a8c6f",
+    "Title": "Tree Sculpture",
+    "Description": "A beautiful representation of nature.",
+    "WoodcarverId": "e0b7c9ae-18cd-4f8e-99e0-72f06c6b23f1",
+    "WoodTypeId": "fae8f3b1-7f8a-4e3e-84f1-2a8b89c2e9e4",
+    "ImageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.etsystatic.com%2F5686286%2Fr%2Fil%2Ff475a2%2F2065113360%2Fil_fullxfull.2065113360_8sle.jpg&f=1&nofb=1&ipt=6489d129d009202efc8c27a1e10b383e403268deadbd35d225494dc586549683&ipo=images",
+    "IsAvailable": true,
+    "IsDeleted": false
+  }
+]

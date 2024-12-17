@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Web.ViewMode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Web.Infrastructure", "WoodcarvingApp.Web.Infrastructure\WoodcarvingApp.Web.Infrastructure.csproj", "{532A9506-B991-4284-8FD9-FCB6DBAE5C0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodcarvingApp.Services.Mapping", "WoodcarvingApp.Services.Mapping\WoodcarvingApp.Services.Mapping.csproj", "{E8F7675D-0E5E-41F8-A17F-CAD6D0B05CD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodcarvingApp.Services.Mapping", "WoodcarvingApp.Services.Mapping\WoodcarvingApp.Services.Mapping.csproj", "{E8F7675D-0E5E-41F8-A17F-CAD6D0B05CD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

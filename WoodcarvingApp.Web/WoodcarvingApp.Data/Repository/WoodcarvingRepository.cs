@@ -6,27 +6,36 @@ using WoodcarvingApp.Web.Data;
 
 public class WoodcarvingRepository : BaseRepository<Woodcarving, Guid>, IWoodcarvingRepository
 {
-    private readonly WoodcarvingDbContext dbContext;
+	private readonly WoodcarvingDbContext dbContext;
 
-    public WoodcarvingRepository(WoodcarvingDbContext dbContext) : base(dbContext)
-    {
-        this.dbContext = dbContext;
-    }
-    public async Task<IEnumerable<Woodcarver>> GetWoodcarverListAsync()
-    {
-        var woodcarvers = await dbContext.Woodcarvers
-            .Where(w => !w.IsDeleted)
-            .ToListAsync();
+	public WoodcarvingRepository(WoodcarvingDbContext dbContext) : base(dbContext)
+	{
+		this.dbContext = dbContext;
+	}
+	public async Task<IEnumerable<Woodcarver>> GetWoodcarverListAsync()
+	{
+		var woodcarvers = await dbContext.Woodcarvers
+			.Where(w => !w.IsDeleted)
+			.ToListAsync();
 
-        return woodcarvers;
-    }
+		return woodcarvers;
+	}
+	public IQueryable<string> GetWoodcarverListStringAsync()
+	{
+		var woodcarvers = dbContext.Woodcarvers
+			.Where(w => !w.IsDeleted)
+			.Select(w => w.FirstName)
+			.AsQueryable();
 
-    public async Task<IEnumerable<WoodType>> GetWoodTypeListAsync()
-    {
-        var woodTypes = await dbContext.WoodTypes
-            .Where(w => !w.IsDeleted)
-            .ToListAsync();
+		return woodcarvers.AsQueryable();
+	}
 
-        return woodTypes;
-    }
+	public async Task<IEnumerable<WoodType>> GetWoodTypeListAsync()
+	{
+		var woodTypes = await dbContext.WoodTypes
+			.Where(w => !w.IsDeleted)
+			.ToListAsync();
+
+		return woodTypes;
+	}
 }

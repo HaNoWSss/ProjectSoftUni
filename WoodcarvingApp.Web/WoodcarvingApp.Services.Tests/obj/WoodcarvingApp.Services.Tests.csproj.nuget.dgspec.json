@@ -1,0 +1,558 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Tests\\WoodcarvingApp.Services.Tests.csproj": {}
+  },
+  "projects": {
+    "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj",
+        "projectName": "WoodcarvingApp.Common",
+        "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj",
+        "packagesPath": "C:\\Users\\bird\\.nuget\\packages\\",
+        "outputPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bird\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj",
+        "projectName": "WoodcarvingApp.Data.Models",
+        "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj",
+        "packagesPath": "C:\\Users\\bird\\.nuget\\packages\\",
+        "outputPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bird\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.1.34, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\WoodcarvingApp.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\WoodcarvingApp.Data.csproj",
+        "projectName": "WoodcarvingApp.Data",
+        "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\WoodcarvingApp.Data.csproj",
+        "packagesPath": "C:\\Users\\bird\\.nuget\\packages\\",
+        "outputPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bird\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj"
+              },
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Data\\WoodcarvingApp.Services.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Data\\WoodcarvingApp.Services.Data.csproj",
+        "projectName": "WoodcarvingApp.Services.Data",
+        "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Data\\WoodcarvingApp.Services.Data.csproj",
+        "packagesPath": "C:\\Users\\bird\\.nuget\\packages\\",
+        "outputPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bird\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj"
+              },
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\WoodcarvingApp.Data.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\WoodcarvingApp.Data.csproj"
+              },
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\WoodcarvingApp.Web.ViewModels.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\WoodcarvingApp.Web.ViewModels.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Mapping\\WoodcarvingApp.Services.Mapping.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Mapping\\WoodcarvingApp.Services.Mapping.csproj",
+        "projectName": "WoodcarvingApp.Services.Mapping",
+        "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Mapping\\WoodcarvingApp.Services.Mapping.csproj",
+        "packagesPath": "C:\\Users\\bird\\.nuget\\packages\\",
+        "outputPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Mapping\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bird\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Tests\\WoodcarvingApp.Services.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Tests\\WoodcarvingApp.Services.Tests.csproj",
+        "projectName": "WoodcarvingApp.Services.Tests",
+        "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Tests\\WoodcarvingApp.Services.Tests.csproj",
+        "packagesPath": "C:\\Users\\bird\\.nuget\\packages\\",
+        "outputPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bird\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj"
+              },
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\WoodcarvingApp.Data.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\WoodcarvingApp.Data.csproj"
+              },
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Data\\WoodcarvingApp.Services.Data.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Data\\WoodcarvingApp.Services.Data.csproj"
+              },
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\WoodcarvingApp.Web.ViewModels.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\WoodcarvingApp.Web.ViewModels.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.8.0, )"
+            },
+            "MockQueryable.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
+            "MockQueryable.Moq": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.14.0, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[3.9.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\WoodcarvingApp.Web.ViewModels.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\WoodcarvingApp.Web.ViewModels.csproj",
+        "projectName": "WoodcarvingApp.Web.ViewModels",
+        "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\WoodcarvingApp.Web.ViewModels.csproj",
+        "packagesPath": "C:\\Users\\bird\\.nuget\\packages\\",
+        "outputPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Web.ViewModels\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bird\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Common\\WoodcarvingApp.Common.csproj"
+              },
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data.Models\\WoodcarvingApp.Data.Models.csproj"
+              },
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\WoodcarvingApp.Data.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Data\\WoodcarvingApp.Data.csproj"
+              },
+              "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Mapping\\WoodcarvingApp.Services.Mapping.csproj": {
+                "projectPath": "C:\\uni\\ProjectSoftUni\\WoodcarvingApp.Web\\WoodcarvingApp.Services.Mapping\\WoodcarvingApp.Services.Mapping.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
